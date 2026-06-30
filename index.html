@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Servus — where to in Munich</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app">
+
+    <!-- ============ HOME ============ -->
+    <section id="home" class="screen is-active">
+      <div class="home-inner">
+        <header class="home-head">
+          <h1 class="wordmark">Servus<span class="wordmark-dot">.</span></h1>
+          <p class="home-sub">Where should we go in Munich?</p>
+        </header>
+
+        <div class="fields" id="fields"><!-- dropdowns injected --></div>
+
+        <button id="go" class="go-btn" type="button">
+          <span>Go</span>
+        </button>
+
+        <p class="home-foot" id="home-foot">Using your location for travel times</p>
+      </div>
+    </section>
+
+    <!-- ============ RESULTS ============ -->
+    <section id="results" class="screen">
+      <div class="results-hero">
+        <img id="hero-img" class="results-hero-img" alt="" />
+        <div class="results-hero-scrim"></div>
+        <button class="icon-btn back-btn hero-back" id="results-back" aria-label="Back to home">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="results-hero-cap">
+          <h2 id="hero-title" class="results-hero-title">Restaurants</h2>
+          <p id="hero-count" class="results-hero-count"></p>
+        </div>
+      </div>
+
+      <div class="results-list" id="results-list"><!-- cards injected --></div>
+    </section>
+
+    <!-- ============ DETAIL ============ -->
+    <section id="detail" class="screen">
+      <div class="detail-stage" id="detail-stage">
+        <div class="detail-bars" id="detail-bars"></div>
+        <img id="detail-img" class="detail-img" alt="" />
+        <div class="detail-fallback" id="detail-fallback" hidden>
+          <div class="detail-fallback-icon" id="detail-fallback-icon" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <button class="icon-btn back-btn detail-back" id="detail-back" aria-label="Back to results">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="name-bubble glass" id="detail-name">Name</div>
+
+      <button class="icon-btn move-btn" id="detail-move" aria-label="Hold and drag to pan the photo" hidden>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M12 3v18M3 12h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9.4 5.4 12 2.8l2.6 2.6M9.4 18.6 12 21.2l2.6-2.6M5.4 9.4 2.8 12l2.6 2.6M18.6 9.4 21.2 12l-2.6 2.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="detail-panel glass" id="detail-panel">
+        <div class="panel-grabber" id="panel-grabber" role="button" aria-label="Drag down to minimise" tabindex="0"><span></span></div>
+        <div class="stats-row" id="detail-stats-row"><!-- spec chips --></div>
+        <div class="stats-row2">
+          <div class="stats-loc" id="detail-loc"><!-- location chip --></div>
+          <a class="maps-btn" id="detail-maps" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" fill="currentColor"/></svg>
+            <span>Maps</span>
+          </a>
+        </div>
+        <p class="detail-desc" id="detail-desc"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
