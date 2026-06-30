@@ -8,12 +8,12 @@
 
   /* ---------- config ---------- */
   const CATEGORIES = {
-    monument:    { label: "Monument",          plural: "Monuments" },
-    restaurant:  { label: "Restaurant",        plural: "Restaurants" },
-    bakery:      { label: "Bakery",            plural: "Bakeries" },
-    active:      { label: "Active",            plural: "Active attractions" },
-    supermarket: { label: "Supermarket",       plural: "Supermarkets" },
-    pharmacy:    { label: "Pharmacy",          plural: "Pharmacies" }
+    monument:    { label: "Monument",    plural: "Monuments" },
+    restaurant:  { label: "Restaurant",  plural: "Restaurants" },
+    bakery:      { label: "Bakery",      plural: "Bakeries" },
+    active:      { label: "Active",      plural: "Active attractions" },
+    supermarket: { label: "Supermarket", plural: "Supermarkets" },
+    pharmacy:    { label: "Pharmacy",    plural: "Pharmacies" }
   };
   const TYPE_ORDER = ["monument", "restaurant", "bakery", "active", "supermarket", "pharmacy"];
 
@@ -55,8 +55,10 @@
       '<path d="M5 10.6v6.8M9.6 10.6v6.8M14.4 10.6v6.8M19 10.6v6.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>' +
       '<path d="M3.2 18.6h17.6M3.8 21h16.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
     restaurant:
-      '<path d="M6.2 3v5.1a1.8 1.8 0 0 0 1.8 1.8M9.8 3v5.1a1.8 1.8 0 0 1-1.8 1.8M8 9.9V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M16.6 3c-1.5 1-2.4 3.2-2.4 5.2 0 1.9 1 3 2.4 3M16.6 11.2V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+      '<path d="M6 3.6v4.1a2 2 0 0 0 4 0V3.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M8 3.6v4.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>' +
+      '<path d="M8 7.7V20.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>' +
+      '<path d="M16.4 3.6c-1.7 0-2.7 2.4-2.7 5 0 1.9 1.1 3 2.7 3V20.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
     bakery:
       '<path d="M4.2 8.4h12.2v3.3a4.6 4.6 0 0 1-4.6 4.6H8.8a4.6 4.6 0 0 1-4.6-4.6V8.4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>' +
       '<path d="M16.4 9.3h2a2.1 2.1 0 0 1 0 4.2h-2" fill="none" stroke="currentColor" stroke-width="1.8"/>' +
@@ -85,8 +87,8 @@
   };
 
   /* ---------- state ---------- */
-  const state = { type: null, travel: "any", rating: "any", userLoc: null, results: [], current: null };
-  const detail = { pan: 0, maxPan: 0 };
+  const state = { type: null, travel: "any", rating: "any", userLoc: null, located: false, results: [], current: null };
+  const detail = { pan: 0, maxPan: 0, collapseP: 0, descFull: 60 };
 
   const VIEW_BG = { home: "#ffffff", results: "#f5f5f7", detail: "#000000" };
 
@@ -94,6 +96,9 @@
   const $ = sel => document.querySelector(sel);
   function el(html) { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; }
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const sign = x => (x > 0 ? 1 : x < 0 ? -1 : 0);
+  // Apple rubber-band: offset grows with diminishing returns, asymptotes to ±limit
+  function rubber(x, limit) { const c = 0.55; return (x * limit * c) / (limit + c * Math.abs(x)); }
   function haptic() { if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} } }
   function compact(n) {
     if (n == null) return "";
@@ -109,8 +114,8 @@
   function travelTimes(place) {
     const loc = state.userLoc || DATA.center;
     const km = haversineKm(loc, place);
-    const walkMin = Math.max(1, Math.round((km / 4.8) * 60 * 1.25));   // ~4.8 km/h + detour
-    const driveMin = Math.max(1, Math.round((km / 26) * 60 * 1.35));   // ~26 km/h urban + detour
+    const walkMin = Math.max(1, Math.round((km / 4.8) * 60 * 1.25));
+    const driveMin = Math.max(1, Math.round((km / 26) * 60 * 1.35));
     return { km, walkMin, driveMin };
   }
   function mapsUrl(p) {
@@ -122,30 +127,51 @@
     const m = document.querySelector('meta[name="theme-color"]');
     if (m) m.setAttribute("content", c);
   }
+  function currentView() {
+    const a = document.querySelector(".screen.is-active");
+    return a ? a.id : "home";
+  }
 
-  /* ---------- press-grow: buttons enlarge + drift toward finger, spring back ---------- */
-  function addPressGrow(node, scale) {
-    scale = scale || 1.06;
+  /* ---------- Apple-style button: light rim + finger-tracked highlight + rubber-band drag ---------- */
+  function enhanceButton(node, opts) {
+    opts = opts || {};
+    const limit = opts.limit || 34, scale = opts.scale || 1.06, drag = opts.drag !== false;
+    const sheen = document.createElement("span");
+    sheen.className = "btn-sheen";
+    node.appendChild(sheen);
     let active = false, sx = 0, sy = 0;
-    const onMove = e => {
+    function hl(e) {
+      const r = node.getBoundingClientRect();
+      sheen.style.setProperty("--hx", ((e.clientX - r.left) / r.width * 100) + "%");
+      sheen.style.setProperty("--hy", ((e.clientY - r.top) / r.height * 100) + "%");
+    }
+    function onMove(e) {
       if (!active) return;
-      const dx = clamp(e.clientX - sx, -5, 5), dy = clamp(e.clientY - sy, -5, 5);
-      node.style.transform = "translate(" + dx + "px," + dy + "px) scale(" + scale + ")";
-    };
-    const onUp = () => {
+      hl(e);
+      if (drag) {
+        const dx = rubber(e.clientX - sx, limit), dy = rubber(e.clientY - sy, limit);
+        node.style.transform = "translate(" + dx + "px," + dy + "px) scale(" + scale + ")";
+      }
+    }
+    function onUp() {
       if (!active) return;
       active = false;
-      node.style.transition = "transform 0.34s var(--spring)";
+      node.classList.remove("is-pressing");
+      node.style.transition = "transform 0.42s var(--spring)";
       node.style.transform = "";
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
-    };
+      window.removeEventListener("pointercancel", onUp);
+    }
     node.addEventListener("pointerdown", e => {
       active = true; sx = e.clientX; sy = e.clientY;
-      node.style.transition = "transform 0.12s var(--ease)";
+      node.classList.add("is-pressing");
+      hl(e);
+      node.style.transition = "transform 0.14s var(--ease)";
       node.style.transform = "scale(" + scale + ")";
       window.addEventListener("pointermove", onMove);
       window.addEventListener("pointerup", onUp);
+      window.addEventListener("pointercancel", onUp);
     });
   }
 
@@ -156,11 +182,16 @@
     f.classList.toggle("is-error", !!isError);
   }
   function requestLocation() {
-    if (!("geolocation" in navigator)) { state.userLoc = DATA.center; setFoot("Using Marienplatz for travel times"); return; }
+    if (!("geolocation" in navigator)) { state.userLoc = DATA.center; setFoot("Tap to use your location"); return; }
+    setFoot("Locating you…");
     navigator.geolocation.getCurrentPosition(
-      pos => { state.userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude }; setFoot("Using your location for travel times", false, true); },
-      () => { state.userLoc = DATA.center; setFoot("Location off — distances from Marienplatz", true); },
-      { enableHighAccuracy: true, timeout: 9000, maximumAge: 120000 }
+      pos => {
+        state.userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        state.located = true;
+        setFoot("Using your location for travel times", false, true);
+      },
+      () => { state.userLoc = state.userLoc || DATA.center; setFoot("Tap to use your location — using Marienplatz", true); },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
   }
 
@@ -212,7 +243,6 @@
       menu.appendChild(o);
     });
 
-    // default selection for non-type fields = first option ("any")
     if (field.key !== "type") {
       setValue(field.options[0]);
       menu.querySelector(".opt").classList.add("is-selected");
@@ -236,7 +266,7 @@
     document.addEventListener("keydown", e => { if (e.key === "Escape") closeAllDropdowns(null); });
   }
 
-  /* ---------- compute results ---------- */
+  /* ---------- compute ---------- */
   function compute() {
     let list = DATA.places
       .filter(p => p.category === state.type)
@@ -247,7 +277,7 @@
     return list;
   }
 
-  /* ---------- results screen ---------- */
+  /* ---------- results ---------- */
   function statHTML(p) {
     return (
       '<div class="card-stats">' +
@@ -270,12 +300,7 @@
       img.addEventListener("error", () => { img.remove(); fallback(); });
       thumb.appendChild(img);
     } else { fallback(); }
-    const body = el(
-      '<div class="card-body">' +
-        '<div class="card-title">' + p.name + "</div>" +
-        statHTML(p) +
-      "</div>"
-    );
+    const body = el('<div class="card-body"><div class="card-title">' + p.name + "</div>" + statHTML(p) + "</div>");
     card.appendChild(thumb);
     card.appendChild(body);
     const open = () => { state.current = p; pushView("detail", p.id); };
@@ -304,11 +329,8 @@
     listEl.scrollTop = 0;
     if (!n) {
       listEl.appendChild(el(
-        '<div class="empty">' +
-          '<div class="empty-ico">' + ICON.search + "</div>" +
-          "<h3>Nothing matches yet</h3>" +
-          "<p>Try widening the travel time or lowering the rating.</p>" +
-        "</div>"
+        '<div class="empty"><div class="empty-ico">' + ICON.search + "</div>" +
+        "<h3>Nothing matches yet</h3><p>Try widening the travel time or lowering the rating.</p></div>"
       ));
       return;
     }
@@ -319,7 +341,7 @@
     });
   }
 
-  /* ---------- detail screen ---------- */
+  /* ---------- detail ---------- */
   function chip(inner, cls) { return '<span class="chip' + (cls ? " " + cls : "") + '">' + inner + "</span>"; }
 
   function computePan() {
@@ -329,21 +351,37 @@
     if (detail.maxPan < 8) { moveBtn.hidden = true; detail.pan = 0; img.style.setProperty("--pan", "0px"); }
     else moveBtn.hidden = false;
   }
-  function setCollapsed(c) {
-    $("#detail-panel").classList.toggle("is-collapsed", c);
-    requestAnimationFrame(() => requestAnimationFrame(updatePanelMetrics));
-  }
   function updatePanelMetrics() {
     const panel = $("#detail-panel"), moveBtn = $("#detail-move");
     const r = panel.getBoundingClientRect();
-    moveBtn.style.bottom = Math.max(80, window.innerHeight - r.top + 12) + "px";
+    moveBtn.style.bottom = Math.max(90, window.innerHeight - r.top + 18) + "px";  // sits above the panel
+  }
+  function setCollapseProgress(p) {
+    detail.collapseP = p;
+    const desc = $("#detail-desc"), panel = $("#detail-panel");
+    desc.style.maxHeight = (detail.descFull * (1 - p)) + "px";
+    desc.style.opacity = String(1 - p);
+    desc.style.marginTop = (11 * (1 - p)) + "px";
+    panel.classList.toggle("is-collapsed", p > 0.5);
+    updatePanelMetrics();
+  }
+  let collapseRAF = 0;
+  function animateCollapse(target) {
+    cancelAnimationFrame(collapseRAF);
+    const start = detail.collapseP, t0 = performance.now(), dur = 300;
+    function step(now) {
+      const k = clamp((now - t0) / dur, 0, 1);
+      const e = 1 - Math.pow(1 - k, 3);
+      setCollapseProgress(start + (target - start) * e);
+      if (k < 1) collapseRAF = requestAnimationFrame(step);
+    }
+    collapseRAF = requestAnimationFrame(step);
   }
 
   function openDetail(p) {
     if (!p) return;
     state.current = p;
     detail.pan = 0;
-    setCollapsed(false);
     $("#detail-name").textContent = p.name;
 
     const img = $("#detail-img"), fb = $("#detail-fallback"), bars = $("#detail-bars"), moveBtn = $("#detail-move");
@@ -379,154 +417,99 @@
       chip(ICON.car + p.driveMin + ' <span class="cl">min</span>')
     ].join("");
     $("#detail-loc").innerHTML = p.neighborhood ? chip(ICON.pin + '<span class="lbl">' + p.neighborhood + "</span>", "loc") : "";
-    $("#detail-desc").textContent = p.description || "";
+
+    // measure full description height, then start expanded
+    const desc = $("#detail-desc");
+    desc.textContent = p.description || "";
+    desc.style.transition = "none";
+    desc.style.maxHeight = "none"; desc.style.opacity = "1"; desc.style.marginTop = "11px";
+    detail.descFull = Math.max(20, desc.offsetHeight);
+    setCollapseProgress(0);
+    requestAnimationFrame(() => { desc.style.transition = ""; });
+
     $("#detail-maps").href = mapsUrl(p);
     requestAnimationFrame(updatePanelMetrics);
   }
 
-  /* ---------- move / pan button ---------- */
+  /* ---------- move / pan button (joystick: steady scroll in drag direction) ---------- */
   function setupMoveButton() {
-    const btn = $("#detail-move"), img = $("#detail-img"), panel = $("#detail-panel");
-    let active = false, startX = 0, startPan = 0, wasCollapsed = false;
+    const btn = $("#detail-move"), img = $("#detail-img");
+    const sheen = document.createElement("span"); sheen.className = "btn-sheen"; btn.appendChild(sheen);
+    const SPEED = 2.6, DEAD = 6, BLIMIT = 22;
+    let active = false, sx = 0, dx = 0, raf = 0, wasP = 0;
+    function hl(e) {
+      const r = btn.getBoundingClientRect();
+      sheen.style.setProperty("--hx", ((e.clientX - r.left) / r.width * 100) + "%");
+      sheen.style.setProperty("--hy", ((e.clientY - r.top) / r.height * 100) + "%");
+    }
+    function loop() {
+      if (!active) return;
+      if (Math.abs(dx) > DEAD && detail.maxPan > 0) {
+        const dir = dx > 0 ? -1 : 1;   // drag right → reveal the right of the photo (steady, constant pace)
+        detail.pan = clamp(detail.pan + dir * SPEED, -detail.maxPan, detail.maxPan);
+        img.style.setProperty("--pan", detail.pan + "px");
+      }
+      raf = requestAnimationFrame(loop);
+    }
     btn.addEventListener("pointerdown", e => {
       e.preventDefault();
-      active = true; startX = e.clientX; startPan = detail.pan;
+      active = true; sx = e.clientX; dx = 0;
       try { btn.setPointerCapture(e.pointerId); } catch (err) {}
-      btn.classList.add("is-held");
-      haptic();
-      wasCollapsed = panel.classList.contains("is-collapsed");
-      setCollapsed(true);
+      btn.classList.add("is-held", "is-pressing");
+      hl(e); haptic();
+      wasP = detail.collapseP; animateCollapse(1);
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(loop);
     });
     btn.addEventListener("pointermove", e => {
       if (!active) return;
-      const dx = e.clientX - startX;
-      const pan = clamp(startPan + dx * 0.6, -detail.maxPan, detail.maxPan);  // slow, predictable
-      detail.pan = pan;
-      img.style.setProperty("--pan", pan + "px");
-      btn.style.setProperty("--mv-x", clamp(dx, -9, 9) + "px");
+      hl(e);
+      dx = e.clientX - sx;
+      btn.style.setProperty("--mv-x", rubber(dx, BLIMIT) + "px");   // button drifts toward finger with resistance
     });
     const end = () => {
       if (!active) return;
       active = false;
-      btn.classList.remove("is-held");
+      cancelAnimationFrame(raf);
+      btn.classList.remove("is-held", "is-pressing");
       btn.style.setProperty("--mv-x", "0px");
-      setCollapsed(wasCollapsed);
+      animateCollapse(wasP);
     };
     btn.addEventListener("pointerup", end);
     btn.addEventListener("pointercancel", end);
   }
 
-  /* ---------- grabber: drag down to minimise, up to restore ---------- */
+  /* ---------- grabber: live drag-down shrinks description, drag-up expands ---------- */
   function setupGrabber() {
-    const grab = $("#panel-grabber"), panel = $("#detail-panel");
-    let active = false, sy = 0, moved = false;
+    const grab = $("#panel-grabber"), desc = $("#detail-desc");
+    let active = false, sy = 0, startP = 0, moved = false;
     grab.addEventListener("pointerdown", e => {
-      active = true; sy = e.clientY; moved = false;
+      active = true; sy = e.clientY; startP = detail.collapseP; moved = false;
+      cancelAnimationFrame(collapseRAF);
       try { grab.setPointerCapture(e.pointerId); } catch (err) {}
-      panel.style.transition = "none";
+      desc.style.transition = "none";
     });
     grab.addEventListener("pointermove", e => {
       if (!active) return;
       const dy = e.clientY - sy;
-      if (Math.abs(dy) > 4) moved = true;
-      panel.style.transform = "translateY(" + clamp(dy * 0.35, -14, 22) + "px)";
+      if (Math.abs(dy) > 3) moved = true;
+      setCollapseProgress(clamp(startP + dy / Math.max(1, detail.descFull), 0, 1));
     });
-    const end = e => {
+    const end = () => {
       if (!active) return;
       active = false;
-      const dy = (e && e.clientY != null ? e.clientY : sy) - sy;
-      panel.style.transition = "transform 0.34s var(--spring)";
-      panel.style.transform = "";
-      if (!moved) setCollapsed(!panel.classList.contains("is-collapsed"));      // tap toggles
-      else if (dy > 26) setCollapsed(true);
-      else if (dy < -26) setCollapsed(false);
+      desc.style.transition = "";
+      animateCollapse(detail.collapseP > 0.5 ? 1 : 0);
     };
     grab.addEventListener("pointerup", end);
     grab.addEventListener("pointercancel", end);
     grab.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setCollapsed(!panel.classList.contains("is-collapsed")); }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); animateCollapse(detail.collapseP > 0.5 ? 0 : 1); }
     });
   }
 
-  /* ---------- back-swipe: drag right from the left edge → previous page ---------- */
-  function currentView() {
-    const a = document.querySelector(".screen.is-active");
-    return a ? a.id : "home";
-  }
-  function prevView(v) { return v === "detail" ? "results" : (v === "results" ? "home" : null); }
-  function clearSwipeStyles() {
-    document.querySelectorAll(".screen").forEach(s => {
-      s.classList.remove("swiping");
-      s.style.transform = ""; s.style.filter = ""; s.style.boxShadow = ""; s.style.transition = "";
-    });
-  }
-  function setupSwipeBack() {
-    let active = false, decided = false, sx = 0, sy = 0, W = 0, curEl = null, prevEl = null, prevWasActive = false;
-    document.addEventListener("pointerdown", e => {
-      const v = currentView();
-      if (v === "home") return;
-      const t = e.target;
-      if (!t || !t.closest) return;
-      if (t.closest(".move-btn, .panel-grabber, .maps-btn, .dropdown")) return;
-      if (v === "detail" && t.closest(".detail-panel")) return;
-      const fromEdge = e.clientX < 36;
-      if (v === "results" && !fromEdge) return;          // results list scrolls — edge only
-      active = true; decided = false; sx = e.clientX; sy = e.clientY; W = window.innerWidth;
-      curEl = document.getElementById(v);
-      const pv = prevView(v); prevEl = pv ? document.getElementById(pv) : null;
-    }, { passive: true });
-    document.addEventListener("pointermove", e => {
-      if (!active) return;
-      const dx = e.clientX - sx, dy = e.clientY - sy;
-      if (!decided) {
-        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
-        if (Math.abs(dy) > Math.abs(dx) || dx < 0) { active = false; return; }  // vertical or leftward → ignore
-        decided = true;
-        if (prevEl) {
-          prevWasActive = prevEl.classList.contains("is-active");
-          prevEl.classList.add("swiping", "is-active");
-        }
-        curEl.classList.add("swiping");
-      }
-      const d = Math.max(0, dx), p = d / W;
-      curEl.style.transform = "translateX(" + d + "px)";
-      curEl.style.boxShadow = "-14px 0 36px rgba(0,0,0,0.20)";
-      if (prevEl) {
-        prevEl.style.transform = "translateX(" + (-22 + 22 * p) + "%)";
-        prevEl.style.filter = "brightness(" + (0.78 + 0.22 * p) + ")";
-      }
-    }, { passive: true });
-    function settle(e) {
-      if (!active) return;
-      active = false;
-      if (!decided) { clearSwipeStyles(); return; }
-      const dx = (e && e.clientX != null ? e.clientX : sx) - sx;
-      const commit = dx > W * 0.32;
-      const cur = curEl, prev = prevEl, wasActive = prevWasActive;
-      [cur, prev].forEach(s => { if (s) { s.classList.remove("swiping"); s.style.transition = "transform 0.34s var(--ease), filter 0.34s var(--ease), box-shadow 0.34s var(--ease)"; } });
-      if (commit) {
-        cur.style.transform = "translateX(" + W + "px)";
-        if (prev) { prev.style.transform = "translateX(0)"; prev.style.filter = "brightness(1)"; }
-        setTimeout(() => { history.back(); }, 300);   // popstate → applyView → clearSwipeStyles
-      } else {
-        cur.style.transform = "translateX(0)"; cur.style.boxShadow = "none";
-        if (prev) { prev.style.transform = "translateX(-22%)"; prev.style.filter = "brightness(0.78)"; }
-        setTimeout(() => {
-          if (prev && !wasActive) prev.classList.remove("is-active");
-          clearSwipeStyles();
-        }, 340);
-      }
-    }
-    document.addEventListener("pointerup", settle, { passive: true });
-    document.addEventListener("pointercancel", settle, { passive: true });
-  }
-
-  /* ---------- navigation / router ---------- */
-  function goTo(id) {
-    document.querySelectorAll(".screen").forEach(s => s.classList.toggle("is-active", s.id === id));
-  }
+  /* ---------- router ---------- */
+  function goTo(id) { document.querySelectorAll(".screen").forEach(s => s.classList.toggle("is-active", s.id === id)); }
   function applyView(view, placeId) {
-    clearSwipeStyles();
     setChrome(view);
     if (view === "results") { renderResults(); goTo("results"); }
     else if (view === "detail") {
@@ -547,6 +530,7 @@
   /* ---------- Go ---------- */
   function onGo() {
     haptic();
+    if (!state.located) requestLocation();
     if (!state.type) {
       const typeDd = document.querySelector('.dropdown[data-key="type"]');
       typeDd.classList.add("nudge");
@@ -569,10 +553,13 @@
     $("#go").addEventListener("click", onGo);
     $("#results-back").addEventListener("click", () => history.back());
     $("#detail-back").addEventListener("click", () => history.back());
-    [$("#go"), $("#results-back"), $("#detail-back"), $("#detail-maps")].forEach(b => b && addPressGrow(b));
+    $("#home-foot").addEventListener("click", () => { if (!state.located) requestLocation(); });
+    enhanceButton($("#go"), { scale: 1.05, limit: 26 });
+    enhanceButton($("#results-back"), { scale: 1.09, limit: 30 });
+    enhanceButton($("#detail-back"), { scale: 1.09, limit: 30 });
+    enhanceButton($("#detail-maps"), { scale: 1.06, limit: 26 });
     setupMoveButton();
     setupGrabber();
-    setupSwipeBack();
     history.replaceState({ view: "home" }, "");
     setChrome("home");
     requestLocation();
