@@ -55,10 +55,10 @@
       '<path d="M5 10.6v6.8M9.6 10.6v6.8M14.4 10.6v6.8M19 10.6v6.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>' +
       '<path d="M3.2 18.6h17.6M3.8 21h16.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
     restaurant:
-      '<path d="M6 3.6v4.1a2 2 0 0 0 4 0V3.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M8 3.6v4.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>' +
-      '<path d="M8 7.7V20.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>' +
-      '<path d="M16.4 3.6c-1.7 0-2.7 2.4-2.7 5 0 1.9 1.1 3 2.7 3V20.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+      '<path d="M6.6 3.8v3.9a2.05 2.05 0 0 0 4.1 0V3.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M8.65 3.8v3.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>' +
+      '<path d="M8.65 7.8V20.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>' +
+      '<path d="M16.2 3.8c-1.7 0-2.75 2.4-2.75 5 0 1.95 1.1 3 2.75 3V20.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
     bakery:
       '<path d="M4.2 8.4h12.2v3.3a4.6 4.6 0 0 1-4.6 4.6H8.8a4.6 4.6 0 0 1-4.6-4.6V8.4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>' +
       '<path d="M16.4 9.3h2a2.1 2.1 0 0 1 0 4.2h-2" fill="none" stroke="currentColor" stroke-width="1.8"/>' +
