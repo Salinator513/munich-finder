@@ -142,11 +142,13 @@
   /* ---------- Apple-style button: light rim + finger-tracked highlight + rubber-band drag ---------- */
   function enhanceButton(node, opts) {
     opts = opts || {};
-    const limit = opts.limit || 34, scale = opts.scale || 1.06, drag = opts.drag !== false;
+    // limit + move govern resistance (smaller = stiffer); stretch governs how much it elongates
+    const limit = opts.limit || 20, scale = opts.scale || 1.06, drag = opts.drag !== false;
+    const stretch = opts.stretch || 140, move = (opts.move != null ? opts.move : 0.3);
     const sheen = document.createElement("span");
     sheen.className = "btn-sheen";
     node.appendChild(sheen);
-    let active = false, sx = 0, sy = 0;
+    let active = false, sx = 0, sy = 0, moved = false;
     function hl(e) {
       const r = node.getBoundingClientRect();
       sheen.style.setProperty("--hx", ((e.clientX - r.left) / r.width * 100) + "%");
@@ -155,9 +157,13 @@
     function onMove(e) {
       if (!active) return;
       hl(e);
+      const ox = e.clientX - sx, oy = e.clientY - sy;
+      if (Math.abs(ox) > 4 || Math.abs(oy) > 4) moved = true;
       if (drag) {
-        const dx = rubber(e.clientX - sx, limit), dy = rubber(e.clientY - sy, limit);
-        node.style.transform = "translate(" + dx + "px," + dy + "px) scale(" + scale + ")";
+        // stretch along the drag axis (button + its symbol/label); drift only a little — big resistance
+        const rx = rubber(ox, limit), ry = rubber(oy, limit);
+        const sxx = scale + Math.abs(rx) / stretch, syy = scale + Math.abs(ry) / stretch;
+        node.style.transform = "translate(" + (rx * move) + "px," + (ry * move) + "px) scale(" + sxx + "," + syy + ")";
       }
     }
     function onUp() {
@@ -171,7 +177,7 @@
       window.removeEventListener("pointercancel", onUp);
     }
     node.addEventListener("pointerdown", e => {
-      active = true; sx = e.clientX; sy = e.clientY;
+      active = true; sx = e.clientX; sy = e.clientY; moved = false;
       node.classList.add("is-pressing");
       hl(e);
       node.style.transition = "transform 0.14s var(--ease)";
@@ -180,6 +186,10 @@
       window.addEventListener("pointerup", onUp);
       window.addEventListener("pointercancel", onUp);
     });
+    // a drag must NOT fire the action / follow the link — only a clean tap does
+    node.addEventListener("click", e => { if (moved) { e.preventDefault(); e.stopImmediatePropagation(); } });
+    node.addEventListener("contextmenu", e => e.preventDefault());   // no long-press link preview
+    node.addEventListener("dragstart", e => e.preventDefault());     // no native link/image drag
   }
 
   /* ---------- geolocation ---------- */
@@ -191,14 +201,21 @@
   function requestLocation() {
     if (!("geolocation" in navigator)) { state.userLoc = DATA.center; setFoot("Using Marienplatz for travel times"); return; }
     setFoot("Locating you…");
+    const ok = pos => {
+      state.userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      state.located = true;
+      setFoot("Using your location for travel times", false, true);
+    };
+    const fail = err => {
+      state.userLoc = state.userLoc || DATA.center;
+      if (err && err.code === 1) setFoot("Location is off — allow it, then tap here", true);
+      else setFoot("Tap here to use your location", true);
+    };
+    // fast coarse fix first (succeeds on far more devices), then retry with high accuracy
     navigator.geolocation.getCurrentPosition(
-      pos => {
-        state.userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        state.located = true;
-        setFoot("Using your location for travel times", false, true);
-      },
-      () => { state.userLoc = state.userLoc || DATA.center; setFoot("Using Marienplatz for travel times", true); },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      ok,
+      () => navigator.geolocation.getCurrentPosition(ok, fail, { enableHighAccuracy: true, timeout: 12000, maximumAge: 300000 }),
+      { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 }
     );
   }
 
@@ -369,6 +386,8 @@
     extra.style.maxHeight = (detail.extraFull * (1 - p)) + "px";
     extra.style.opacity = String(1 - p);
     extra.style.marginTop = (8 * (1 - p)) + "px";
+    // when fully open, let the Maps button stretch past the box on press without being clipped
+    extra.style.overflow = p > 0.02 ? "hidden" : "visible";
     panel.classList.toggle("is-collapsed", p > 0.5);
     updatePanelMetrics();
   }
@@ -451,12 +470,16 @@
   function setupMoveButton() {
     const btn = $("#detail-move"), img = $("#detail-img");
     const sheen = document.createElement("span"); sheen.className = "btn-sheen"; btn.appendChild(sheen);
-    const SPEED = 2.6, DEAD = 6, BLIMIT = 22;
-    let active = false, sx = 0, dx = 0, raf = 0, wasP = 0;
+    const SPEED = 2.6, DEAD = 6, BLIMIT = 16;   // smaller limit = more resistance
+    let active = false, sx = 0, sy = 0, dx = 0, raf = 0, wasP = 0;
     function hl(e) {
       const r = btn.getBoundingClientRect();
       sheen.style.setProperty("--hx", ((e.clientX - r.left) / r.width * 100) + "%");
       sheen.style.setProperty("--hy", ((e.clientY - r.top) / r.height * 100) + "%");
+    }
+    function resetStretch() {
+      btn.style.setProperty("--mv-x", "0px"); btn.style.setProperty("--mv-y", "0px");
+      btn.style.setProperty("--mv-sx", "1.5"); btn.style.setProperty("--mv-sy", "1.5");
     }
     function loop() {
       if (!active) return;
@@ -469,8 +492,9 @@
     }
     btn.addEventListener("pointerdown", e => {
       e.preventDefault();
-      active = true; sx = e.clientX; dx = 0;
+      active = true; sx = e.clientX; sy = e.clientY; dx = 0;
       try { btn.setPointerCapture(e.pointerId); } catch (err) {}
+      resetStretch();
       btn.classList.add("is-held", "is-pressing");
       hl(e); haptic();
       wasP = detail.collapseP; animateCollapse(1);
@@ -480,14 +504,19 @@
       if (!active) return;
       hl(e);
       dx = e.clientX - sx;
-      btn.style.setProperty("--mv-x", rubber(dx, BLIMIT) + "px");   // button drifts toward finger with resistance
+      const rx = rubber(dx, BLIMIT), ry = rubber(e.clientY - sy, BLIMIT);
+      // stretches toward the finger (with its symbol), drifts only a little — high resistance
+      btn.style.setProperty("--mv-x", (rx * 0.5) + "px");
+      btn.style.setProperty("--mv-y", (ry * 0.5) + "px");
+      btn.style.setProperty("--mv-sx", (1.5 + Math.abs(rx) / 80) + "");
+      btn.style.setProperty("--mv-sy", (1.5 + Math.abs(ry) / 80) + "");
     });
     const end = () => {
       if (!active) return;
       active = false;
       cancelAnimationFrame(raf);
       btn.classList.remove("is-held", "is-pressing");
-      btn.style.setProperty("--mv-x", "0px");
+      resetStretch();
       animateCollapse(wasP);
     };
     btn.addEventListener("pointerup", end);
@@ -580,13 +609,15 @@
   /* ---------- init ---------- */
   function init() {
     renderFields();
+    // enhance FIRST so the drag-cancels-tap guard runs before each button's action listener
+    enhanceButton($("#go"), { scale: 1.05, limit: 22, stretch: 120, move: 0.3 });
+    enhanceButton($("#results-back"), { scale: 1.3, limit: 18, stretch: 130, move: 0.26 });
+    enhanceButton($("#detail-back"), { scale: 1.3, limit: 18, stretch: 130, move: 0.26 });
+    enhanceButton($("#detail-maps"), { scale: 1.06, limit: 16, stretch: 110, move: 0.18 });  // stiffest — stretches, barely drifts
     $("#go").addEventListener("click", onGo);
     $("#results-back").addEventListener("click", () => history.back());
     $("#detail-back").addEventListener("click", () => history.back());
-    enhanceButton($("#go"), { scale: 1.05, limit: 26 });
-    enhanceButton($("#results-back"), { scale: 1.32, limit: 30 });
-    enhanceButton($("#detail-back"), { scale: 1.32, limit: 30 });
-    enhanceButton($("#detail-maps"), { scale: 1.06, drag: false });   // Maps only grows — never drifts
+    $("#home-foot").addEventListener("click", () => requestLocation());
     setupMoveButton();
     setupGrabber();
     history.replaceState({ view: "home" }, "");

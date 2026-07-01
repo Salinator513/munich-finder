@@ -267,7 +267,8 @@ img { display: block; }
   gap: 6px;
 }
 .home-foot svg { flex: 0 0 auto; }
-.home-foot.is-error { color: #d9480f; }
+.home-foot { cursor: pointer; }
+.home-foot.is-error { color: #9a7d1a; }   /* muted amber, not an alarming red */
 
 /* ============================================================
    RESULTS
@@ -466,6 +467,8 @@ img { display: block; }
               rgba(255,255,255,0.72), rgba(255,255,255,0.2) 42%, rgba(255,255,255,0) 70%);
 }
 .is-pressing > .btn-sheen { opacity: 1; }
+/* holding/dragging a button must not select its label or pop the iOS link/callout menu */
+.icon-btn, .go-btn, .maps-btn { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
 .back-btn { position: absolute; }
 .hero-back { top: calc(14px + var(--safe-top)); left: 14px; z-index: 6; }
 .detail-back { top: calc(16px + var(--safe-top)); left: 16px; z-index: 9; }
@@ -474,22 +477,22 @@ img { display: block; }
 .move-btn {
   position: absolute;
   right: 28px;
-  bottom: 230px;                 /* JS keeps this just above the panel */
+  bottom: 230px;                 /* JS keeps this just above the panel (driven per-frame, no CSS bottom transition) */
   width: 56px; height: 56px;     /* grows big only while held (JS scale) */
   z-index: 8;
-  --mv-x: 0px;
+  --mv-x: 0px; --mv-y: 0px; --mv-sx: 1.5; --mv-sy: 1.5;
   touch-action: none;
   transition: transform 0.22s var(--spring), background 0.2s var(--ease),
-              color 0.2s var(--ease), box-shadow 0.24s var(--ease), bottom 0.42s var(--spring);
+              color 0.2s var(--ease), box-shadow 0.24s var(--ease);
 }
 .move-btn[hidden] { display: none; }
 .move-btn.is-held {
   background: rgba(0,113,227,0.92);
   color: #fff;
   border-color: rgba(255,255,255,0.7);
-  transform: translateX(var(--mv-x)) scale(1.5);
-  box-shadow: 0 0 0 6px rgba(0,113,227,0.20), 0 14px 32px rgba(0,113,227,0.5),
-              inset 0 1px 2px rgba(255,255,255,0.55);
+  /* stretches toward the drag (button + symbol), drifts only a little — no hard blue ring */
+  transform: translate(var(--mv-x), var(--mv-y)) scale(var(--mv-sx), var(--mv-sy));
+  box-shadow: 0 14px 32px rgba(0,113,227,0.5), inset 0 1px 2px rgba(255,255,255,0.55);
 }
 
 .name-bubble {
@@ -589,8 +592,8 @@ img { display: block; }
 
 /* collapsible region (description + location + Maps) — hidden when the box is minimised */
 .detail-extra { overflow: hidden; }
-/* location chip on the left, Maps button on the right */
-.stats-row2 { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; }
+/* location chip on the left, Maps button on the right — sits ABOVE the description */
+.stats-row2 { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 2px; }
 .chip {
   display: inline-flex;
   align-items: center;
@@ -613,7 +616,7 @@ img { display: block; }
 .chip.loc .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .detail-desc {
-  margin-top: 0;
+  margin-top: 12px;
   font-size: 14px;
   line-height: 1.42;
   color: var(--ink);
