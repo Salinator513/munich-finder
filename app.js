@@ -88,7 +88,7 @@
 
   /* ---------- state ---------- */
   const state = { type: null, travel: "any", rating: "any", userLoc: null, located: false, results: [], current: null };
-  const detail = { pan: 0, maxPan: 0, collapseP: 0, descFull: 60 };
+  const detail = { pan: 0, maxPan: 0, collapseP: 0, extraFull: 60 };
 
   const VIEW_BG = { home: "#ffffff", results: "#f5f5f7", detail: "#000000" };
 
@@ -358,10 +358,10 @@
   }
   function setCollapseProgress(p) {
     detail.collapseP = p;
-    const desc = $("#detail-desc"), panel = $("#detail-panel");
-    desc.style.maxHeight = (detail.descFull * (1 - p)) + "px";
-    desc.style.opacity = String(1 - p);
-    desc.style.marginTop = (11 * (1 - p)) + "px";
+    const extra = $("#detail-extra"), panel = $("#detail-panel");
+    extra.style.maxHeight = (detail.extraFull * (1 - p)) + "px";
+    extra.style.opacity = String(1 - p);
+    extra.style.marginTop = (8 * (1 - p)) + "px";
     panel.classList.toggle("is-collapsed", p > 0.5);
     updatePanelMetrics();
   }
@@ -382,7 +382,7 @@
     if (!p) return;
     state.current = p;
     detail.pan = 0;
-    $("#detail-name").textContent = p.name;
+    $("#detail-title").textContent = p.name;
 
     const img = $("#detail-img"), fb = $("#detail-fallback"), bars = $("#detail-bars"), moveBtn = $("#detail-move");
     img.style.setProperty("--pan", "0px");
@@ -411,23 +411,27 @@
     if (p.imageUrl) { img.src = p.imageUrl; } else { img.removeAttribute("src"); img.onerror(); }
 
     $("#detail-stats-row").innerHTML = [
-      chip(catIcon(p.category, 15) + '<span class="lbl">' + CATEGORIES[p.category].label + "</span>", "cat"),
+      chip(catIcon(p.category, 17), "cat"),
       chip(ICON.star + "<b>" + p.rating.toFixed(1) + '</b><span class="cl">(' + compact(p.ratingCount) + ")</span>"),
       chip(ICON.walk + p.walkMin + ' <span class="cl">min</span>'),
       chip(ICON.car + p.driveMin + ' <span class="cl">min</span>')
     ].join("");
-    $("#detail-loc").innerHTML = p.neighborhood ? chip(ICON.pin + '<span class="lbl">' + p.neighborhood + "</span>", "loc") : "";
 
-    // measure full description height, then start expanded
-    const desc = $("#detail-desc");
-    desc.textContent = p.description || "";
-    desc.style.transition = "none";
-    desc.style.maxHeight = "none"; desc.style.opacity = "1"; desc.style.marginTop = "11px";
-    detail.descFull = Math.max(20, desc.offsetHeight);
-    setCollapseProgress(0);
-    requestAnimationFrame(() => { desc.style.transition = ""; });
+    // floating location pill — top-right of the screen
+    const locEl = $("#detail-loc");
+    if (p.neighborhood) { locEl.innerHTML = ICON.pin + '<span class="lbl">' + p.neighborhood + "</span>"; locEl.hidden = false; }
+    else { locEl.hidden = true; locEl.innerHTML = ""; }
 
+    $("#detail-desc").textContent = p.description || "";
     $("#detail-maps").href = mapsUrl(p);
+
+    // measure the collapsible region (description + Maps), then start expanded
+    const extra = $("#detail-extra");
+    extra.style.transition = "none";
+    extra.style.maxHeight = "none"; extra.style.opacity = "1"; extra.style.marginTop = "8px";
+    detail.extraFull = Math.max(20, extra.offsetHeight);
+    setCollapseProgress(0);
+    requestAnimationFrame(() => { extra.style.transition = ""; });
     requestAnimationFrame(updatePanelMetrics);
   }
 
@@ -480,25 +484,26 @@
 
   /* ---------- grabber: live drag-down shrinks description, drag-up expands ---------- */
   function setupGrabber() {
-    const grab = $("#panel-grabber"), desc = $("#detail-desc");
+    const grab = $("#panel-grabber"), extra = $("#detail-extra");
     let active = false, sy = 0, startP = 0, moved = false;
     grab.addEventListener("pointerdown", e => {
       active = true; sy = e.clientY; startP = detail.collapseP; moved = false;
       cancelAnimationFrame(collapseRAF);
       try { grab.setPointerCapture(e.pointerId); } catch (err) {}
-      desc.style.transition = "none";
+      extra.style.transition = "none";
     });
     grab.addEventListener("pointermove", e => {
       if (!active) return;
       const dy = e.clientY - sy;
       if (Math.abs(dy) > 3) moved = true;
-      setCollapseProgress(clamp(startP + dy / Math.max(1, detail.descFull), 0, 1));
+      setCollapseProgress(clamp(startP + dy / Math.max(1, detail.extraFull), 0, 1));
     });
     const end = () => {
       if (!active) return;
       active = false;
-      desc.style.transition = "";
-      animateCollapse(detail.collapseP > 0.5 ? 1 : 0);
+      extra.style.transition = "";
+      if (!moved) animateCollapse(detail.collapseP > 0.5 ? 0 : 1);   // a tap toggles
+      else animateCollapse(detail.collapseP > 0.5 ? 1 : 0);          // a drag snaps to nearest
     };
     grab.addEventListener("pointerup", end);
     grab.addEventListener("pointercancel", end);

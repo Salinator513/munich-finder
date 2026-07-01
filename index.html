@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
   <main id="app">
@@ -65,7 +65,7 @@
         <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
 
-      <div class="name-bubble glass" id="detail-name">Name</div>
+      <div class="detail-loc-top" id="detail-loc" hidden></div>
 
       <button class="icon-btn move-btn" id="detail-move" aria-label="Hold and drag to pan the photo" hidden>
         <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
@@ -76,21 +76,23 @@
 
       <div class="detail-panel glass" id="detail-panel">
         <div class="panel-grabber" id="panel-grabber" role="button" aria-label="Drag down to minimise" tabindex="0"><span></span></div>
+        <h2 class="detail-title" id="detail-title">Name</h2>
         <div class="stats-row" id="detail-stats-row"><!-- spec chips --></div>
-        <div class="stats-row2">
-          <div class="stats-loc" id="detail-loc"><!-- location chip --></div>
-          <a class="maps-btn" id="detail-maps" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" fill="currentColor"/></svg>
-            <span>Maps</span>
-          </a>
+        <div class="detail-extra" id="detail-extra">
+          <p class="detail-desc" id="detail-desc"></p>
+          <div class="extra-actions">
+            <a class="maps-btn" id="detail-maps" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" fill="currentColor"/></svg>
+              <span>Maps</span>
+            </a>
+          </div>
         </div>
-        <p class="detail-desc" id="detail-desc"></p>
       </div>
     </section>
 
   </main>
 
-  <script src="data.js?v=4"></script>
-  <script src="app.js?v=4"></script>
+  <script src="data.js?v=5"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

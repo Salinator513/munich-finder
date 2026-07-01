@@ -507,10 +507,10 @@ img { display: block; }
   z-index: 7;
   padding: 6px 16px 16px;
   border-radius: var(--r-lg);
-  /* more transparent so the photo shows through (Apple "ultra-thin material") */
-  background: rgba(255,255,255,0.42);
-  -webkit-backdrop-filter: saturate(190%) blur(36px) brightness(1.08);
-  backdrop-filter: saturate(190%) blur(36px) brightness(1.08);
+  /* see-through "ultra-thin material" — kept transparent, but title+chips stay high-contrast */
+  background: rgba(255,255,255,0.48);
+  -webkit-backdrop-filter: saturate(190%) blur(36px) brightness(1.1);
+  backdrop-filter: saturate(190%) blur(36px) brightness(1.1);
   border: 0.6px solid rgba(255,255,255,0.6);
   box-shadow: inset 0 1px 1px rgba(255,255,255,0.65), 0 14px 44px rgba(0,0,0,0.26);
 }
@@ -533,33 +533,75 @@ img { display: block; }
 .panel-grabber:active span,
 .detail-panel.is-collapsed .panel-grabber span { background: rgba(120,120,128,0.7); width: 60px; }
 
-/* spec chips — four on one row, location on its own row below */
-.stats-row { display: flex; align-items: center; gap: 6px; }
-.stats-row2 { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; }
-.stats-loc { min-width: 0; overflow: hidden; }
-.chip {
+/* title at the top of the spec box — bold black, ~2.3x the spec size */
+.detail-title {
+  margin: 2px 0 10px;
+  text-align: center;
+  font-size: 27px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #000;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* floating location pill — top-right of the screen, grayish so it reads as a spec, not the title */
+.detail-loc-top {
+  position: absolute;
+  top: calc(20px + var(--safe-top));
+  right: 14px;
+  z-index: 7;
+  max-width: 52%;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 5px 9px;
+  padding: 8px 13px;
   border-radius: 999px;
-  background: rgba(120,120,128,0.16);
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--ink);
+  background: rgba(140,140,146,0.42);
+  -webkit-backdrop-filter: saturate(105%) blur(20px);
+  backdrop-filter: saturate(105%) blur(20px);
+  border: 0.5px solid rgba(255,255,255,0.5);
+  box-shadow: var(--shadow-1);
+}
+.detail-loc-top[hidden] { display: none; }
+.detail-loc-top svg { flex: 0 0 auto; }
+.detail-loc-top .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* spec chips — all four on one row */
+.stats-row { display: flex; align-items: center; gap: 5px; }
+
+/* collapsible region (description + Maps) — hidden when the box is minimised */
+.detail-extra { overflow: hidden; }
+.extra-actions { display: flex; justify-content: flex-end; margin-top: 12px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(118,118,128,0.26);
+  border: 0.5px solid rgba(255,255,255,0.4);
+  font-size: 12px;
+  font-weight: 650;
+  color: #1d1d1f;
   white-space: nowrap;
   flex: 0 0 auto;
 }
 .chip svg { flex: 0 0 auto; }
 .chip .star { color: var(--star); }
-.chip .cl { color: var(--ink-2); font-weight: 500; }
-.chip.cat { flex: 0 1 auto; min-width: 0; }
-.chip.cat .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip .cl { color: #3a3a3c; font-weight: 550; }
+.chip.cat { flex: 0 0 auto; padding-left: 7px; padding-right: 7px; }
 .chip.loc { max-width: 100%; }
 .chip.loc .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .detail-desc {
-  margin-top: 11px;
+  margin-top: 0;
   font-size: 14px;
   line-height: 1.42;
   color: var(--ink);
