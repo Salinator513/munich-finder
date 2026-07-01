@@ -144,9 +144,9 @@
     opts = opts || {};
     // limit + move govern resistance (smaller = stiffer); stretch governs how much it elongates
     const scale = opts.scale || 1.06, drag = opts.drag !== false;
-    // two independent resistances: moveLimit governs drift, stretchMax governs elongation
-    const moveLimit = opts.moveLimit || 38, moveF = (opts.moveF != null ? opts.moveF : 0.4);
-    const stretchMax = (opts.stretchMax != null ? opts.stretchMax : 0.6);
+    // ONE shared resistance (limit) for both drift and stretch; stretch is area-preserving (no growth)
+    const limit = opts.limit || 52, moveF = (opts.moveF != null ? opts.moveF : 0.4);
+    const stretchDenom = opts.stretchDenom || 155;
     const sheen = document.createElement("span");
     sheen.className = "btn-sheen";
     node.appendChild(sheen);
@@ -162,14 +162,12 @@
       const ox = e.clientX - sx, oy = e.clientY - sy;
       if (Math.abs(ox) > 4 || Math.abs(oy) > 4) moved = true;
       if (drag) {
-        // movement: gentle drift with its own light resistance (rubber-banded)
-        const tx = rubber(ox, moveLimit) * moveF, ty = rubber(oy, moveLimit) * moveF;
-        // stretch: barely any resistance — keeps growing with the drag until the finger nears the screen edge
-        const downRoom = Math.max(120, (window.innerHeight - 28) - sy), upRoom = Math.max(120, sy - 28);
-        const rightRoom = Math.max(120, (window.innerWidth - 20) - sx), leftRoom = Math.max(120, sx - 20);
-        const ax = clamp(Math.abs(ox) / (ox >= 0 ? rightRoom : leftRoom), 0, 1);
-        const ay = clamp(Math.abs(oy) / (oy >= 0 ? downRoom : upRoom), 0, 1);
-        const sxx = scale + ax * stretchMax, syy = scale + ay * stretchMax;
+        const rx = rubber(ox, limit), ry = rubber(oy, limit);
+        // drift and stretch share the SAME resistance (limit)
+        const tx = rx * moveF, ty = ry * moveF;
+        // area-preserving: elongate along the drag axis, compress the other — size stays, shape stretches
+        const ax = Math.abs(rx) / stretchDenom, ay = Math.abs(ry) / stretchDenom;
+        const sxx = scale * (1 + ax - ay), syy = scale * (1 + ay - ax);
         node.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + sxx + "," + syy + ")";
       }
     }
@@ -512,11 +510,12 @@
       hl(e);
       dx = e.clientX - sx;
       const rx = rubber(dx, BLIMIT), ry = rubber(e.clientY - sy, BLIMIT);
-      // stretches toward the finger (with its symbol), drifts only a little — high resistance
+      // drift + area-preserving stretch (elongate one axis, compress the other — no growth)
+      const axm = Math.abs(rx) / 95, aym = Math.abs(ry) / 95;
       btn.style.setProperty("--mv-x", (rx * 0.6) + "px");
       btn.style.setProperty("--mv-y", (ry * 0.6) + "px");
-      btn.style.setProperty("--mv-sx", (1.5 + Math.abs(rx) / 55) + "");
-      btn.style.setProperty("--mv-sy", (1.5 + Math.abs(ry) / 55) + "");
+      btn.style.setProperty("--mv-sx", (1.5 * (1 + axm - aym)) + "");
+      btn.style.setProperty("--mv-sy", (1.5 * (1 + aym - axm)) + "");
     });
     const end = () => {
       if (!active) return;
@@ -617,10 +616,10 @@
   function init() {
     renderFields();
     // enhance FIRST so the drag-cancels-tap guard runs before each button's action listener
-    enhanceButton($("#go"), { scale: 1.05, moveLimit: 42, moveF: 0.42, stretchMax: 0.55 });
-    enhanceButton($("#results-back"), { scale: 1.3, moveLimit: 40, moveF: 0.42, stretchMax: 0.55 });
-    enhanceButton($("#detail-back"), { scale: 1.3, moveLimit: 40, moveF: 0.42, stretchMax: 0.55 });
-    enhanceButton($("#detail-maps"), { scale: 1.05, moveLimit: 40, moveF: 0.42, stretchMax: 0.65 });  // stretches the most
+    enhanceButton($("#go"), { scale: 1.05, limit: 52 });
+    enhanceButton($("#results-back"), { scale: 1.28, limit: 52 });
+    enhanceButton($("#detail-back"), { scale: 1.28, limit: 52 });
+    enhanceButton($("#detail-maps"), { scale: 1.05, limit: 32 });   // more resistance — drifts + stretches the least
     $("#go").addEventListener("click", onGo);
     $("#results-back").addEventListener("click", () => history.back());
     $("#detail-back").addEventListener("click", () => history.back());
