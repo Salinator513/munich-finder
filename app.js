@@ -28,11 +28,11 @@
 
   const TRAVEL_OPTIONS = [
     { value: "any", label: "Any time" },
-    { value: 5,  label: "Within 5 min" },
-    { value: 10, label: "Within 10 min" },
-    { value: 15, label: "Within 15 min" },
-    { value: 20, label: "Within 20 min" },
-    { value: 30, label: "Within 30 min" }
+    { value: 5,  label: "Within 5 min walk" },
+    { value: 10, label: "Within 10 min walk" },
+    { value: 15, label: "Within 15 min walk" },
+    { value: 20, label: "Within 20 min walk" },
+    { value: 30, label: "Within 30 min walk" }
   ];
   const RATING_OPTIONS = [
     { value: "any", label: "Any rating" },
@@ -44,7 +44,7 @@
   const FIELDS = [
     { key: "type",   label: "Type",        placeholder: "Choose a place", icon: true,
       options: TYPE_ORDER.map(k => ({ value: k, label: CATEGORIES[k].label })) },
-    { key: "travel", label: "Travel time", placeholder: "Any time",  options: TRAVEL_OPTIONS },
+    { key: "travel", label: "Walking time", placeholder: "Any time",  options: TRAVEL_OPTIONS },
     { key: "rating", label: "Rating",      placeholder: "Any rating", options: RATING_OPTIONS }
   ];
 
@@ -123,8 +123,7 @@
     const loc = state.userLoc || DATA.center;
     const km = haversineKm(loc, place);
     const walkMin = Math.max(1, Math.round((km / 4.8) * 60 * 1.25));
-    const driveMin = Math.max(1, Math.round((km / 26) * 60 * 1.35));
-    return { km, walkMin, driveMin };
+    return { km, walkMin };
   }
   function mapsUrl(p) {
     // ≤15 min walk (inclusive) → walking directions; otherwise transit (tram/bus/S-Bahn)
@@ -215,7 +214,7 @@
   function requestLocation() {
     if (state.located) return Promise.resolve(true);
     if (locPromise) return locPromise;
-    if (!("geolocation" in navigator)) { state.userLoc = state.userLoc || DATA.center; setFoot("Using the hotel for travel times"); return Promise.resolve(false); }
+    if (!("geolocation" in navigator)) { state.userLoc = state.userLoc || DATA.center; setFoot("Using the hotel for walking times"); return Promise.resolve(false); }
     setFoot("Locating you…");
     locPromise = new Promise(resolve => {
       let settled = false;
@@ -223,9 +222,13 @@
       const onFix = pos => {
         state.userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
         state.located = true;
-        setFoot("Using your location for travel times", false, true);
+        setFoot("Using your location for walking times", false, true);
         // if a fix lands after we've already shown results, refresh them with the real distances
-        if (currentView() === "results") { state.results = compute(); state.shown = RESULT_PAGE; renderResults(); }
+        if (currentView() === "results") {
+          const scrollTop = $("#results-list").scrollTop;
+          state.results = compute();
+          renderResults({ scrollTop: scrollTop });
+        }
         finish(true);
       };
       const onErr = err => {
@@ -316,9 +319,9 @@
     let list = DATA.places
       .filter(p => p.category === state.type)
       .map(p => Object.assign({}, p, travelTimes(p)));
-    if (state.travel !== "any") list = list.filter(p => p.driveMin <= state.travel);
+    if (state.travel !== "any") list = list.filter(p => p.walkMin <= state.travel);
     if (state.rating !== "any") list = list.filter(p => p.rating >= state.rating);
-    list.sort((a, b) => a.driveMin - b.driveMin || b.rating - a.rating);
+    list.sort((a, b) => a.walkMin - b.walkMin || b.rating - a.rating);
     return list;
   }
 
@@ -327,8 +330,7 @@
     return (
       '<div class="card-stats">' +
         '<span class="stat">' + ICON.star + "<b>" + p.rating.toFixed(1) + '</b><span class="stat-count">(' + compact(p.ratingCount) + ")</span></span>" +
-        '<span class="stat">' + ICON.walk + p.walkMin + " min</span>" +
-        '<span class="stat">' + ICON.car + p.driveMin + " min</span>" +
+        '<span class="stat">' + ICON.walk + p.walkMin + " min walk</span>" +
       "</div>"
     );
   }
@@ -348,12 +350,17 @@
     const body = el('<div class="card-body"><div class="card-title">' + p.name + "</div>" + statHTML(p) + "</div>");
     card.appendChild(thumb);
     card.appendChild(body);
-    const open = () => { state.current = p; pushView("detail", p.id); };
+    const open = () => {
+      saveResultsHistory();
+      state.current = p;
+      pushView("detail", p.id);
+    };
     card.addEventListener("click", open);
     card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
     return card;
   }
-  function renderResults() {
+  function renderResults(options) {
+    options = options || {};
     const cat = CATEGORIES[state.type];
     const hero = $(".results-hero");
     const heroImg = $("#hero-img");
@@ -365,13 +372,12 @@
 
     const n = state.results.length;
     const bits = [];
-    if (state.travel !== "any") bits.push("within " + state.travel + " min");
+    if (state.travel !== "any") bits.push("within " + state.travel + " min walk");
     if (state.rating !== "any") bits.push(state.rating.toFixed(1) + "★ & up");
     $("#hero-count").textContent = n + (n === 1 ? " place" : " places") + (bits.length ? " · " + bits.join(" · ") : "");
 
     const listEl = $("#results-list");
     listEl.innerHTML = "";
-    listEl.scrollTop = 0;
     if (!n) {
       listEl.appendChild(el(
         '<div class="empty"><div class="empty-ico">' + ICON.search + "</div>" +
@@ -383,6 +389,7 @@
     state.shown = Math.min(state.shown, n);
     renderCards(0, state.shown);
     renderLoadMore();
+    listEl.scrollTop = Math.max(0, Number(options.scrollTop) || 0);
   }
   function renderCards(from, to) {
     const listEl = $("#results-list");
@@ -406,6 +413,7 @@
       const b = document.getElementById("load-more"); if (b) b.remove();
       renderCards(from, state.shown);
       renderLoadMore();
+      saveResultsHistory();
     });
     listEl.appendChild(btn);
   }
@@ -481,11 +489,10 @@
     };
     if (p.imageUrl) { img.src = p.imageUrl; } else { img.removeAttribute("src"); img.onerror(); }
 
-    // spec row — rating · walk · drive (the type/category lives in the top-right pill)
+    // spec row — rating · walking time (the type/category lives in the top-right pill)
     $("#detail-stats-row").innerHTML = [
       chip(ICON.star + "<b>" + p.rating.toFixed(1) + '</b><span class="cl">(' + compact(p.ratingCount) + ")</span>"),
-      chip(ICON.walk + p.walkMin + ' <span class="cl">min</span>'),
-      chip(ICON.car + p.driveMin + ' <span class="cl">min</span>')
+      chip(ICON.walk + p.walkMin + ' <span class="cl">min walk</span>')
     ].join("");
 
     // top-right pill — location TYPE (category), e.g. "Restaurant"
@@ -608,14 +615,30 @@
   }
 
   /* ---------- router ---------- */
+  function saveResultsHistory() {
+    const route = history.state;
+    if (!route || route.view !== "results") return;
+    history.replaceState(Object.assign({}, route, {
+      shown: state.shown,
+      scrollTop: $("#results-list").scrollTop
+    }), "");
+  }
   function goTo(id, instant) {
     const app = document.getElementById("app");
     if (instant) app.classList.add("no-anim");   // pop: browser already animated the slide — swap instantly
     document.querySelectorAll(".screen").forEach(s => s.classList.toggle("is-active", s.id === id));
     if (instant) { void app.offsetWidth; requestAnimationFrame(() => app.classList.remove("no-anim")); }
   }
-  function applyView(view, placeId, instant) {
-    if (view === "results") { setChrome("results", HERO_TOP[state.type]); renderResults(); goTo("results", instant); }
+  function applyView(view, placeId, instant, route) {
+    if (view === "results") {
+      const savedShown = route && Number(route.shown);
+      const savedScroll = route && Number(route.scrollTop);
+      if (savedShown >= RESULT_PAGE) state.shown = Math.min(savedShown, state.results.length);
+      setChrome("results", HERO_TOP[state.type]);
+      renderResults({ scrollTop: savedScroll });
+      goTo("results", instant);
+      requestAnimationFrame(() => { $("#results-list").scrollTop = Math.max(0, savedScroll || 0); });
+    }
     else if (view === "detail") {
       setChrome("detail");
       const p = state.results.find(x => x.id === placeId) || state.current;
@@ -623,12 +646,17 @@
     } else { setChrome("home"); goTo("home", instant); }
   }
   function pushView(view, placeId) {
-    history.pushState({ view: view, placeId: placeId || null }, "");
-    applyView(view, placeId, false);
+    const route = { view: view, placeId: placeId || null };
+    if (view === "results") {
+      route.shown = state.shown;
+      route.scrollTop = 0;
+    }
+    history.pushState(route, "");
+    applyView(view, placeId, false, route);
   }
   window.addEventListener("popstate", e => {
     const s = e.state || { view: "home" };
-    applyView(s.view, s.placeId, true);
+    applyView(s.view, s.placeId, true, s);
   });
   window.addEventListener("resize", () => { if (currentView() === "detail") { computePan(); updatePanelMetrics(); } });
 
@@ -645,7 +673,7 @@
     }
     const go = $("#go");
     go.classList.add("is-busy");
-    // wait (briefly) for a real location fix so travel times + the time filter are accurate
+    // wait (briefly) for a real location fix so walking times + the time filter are accurate
     if (!state.located) await Promise.race([requestLocation(), delay(2600)]);
     state.results = compute();
     state.shown = RESULT_PAGE;

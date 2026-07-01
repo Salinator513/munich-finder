@@ -1,8 +1,8 @@
 # Servus — Where to in Munich
 
-A simple, Apple-styled place finder for the family. Pick a **type**, a **travel time**, and a
+A simple, Apple-styled place finder for the family. Pick a **type**, a **walking time**, and a
 **minimum rating**, tap **Go**, and get a list of real Munich spots sorted by how close they are —
-each with live walk + drive times from your current location, a photo, and a one-tap **Open in Apple Maps** button.
+each with a live walking-time estimate from your current location, a photo, and a one-tap **Open in Apple Maps** button.
 
 55 real, fact-checked Munich places across 6 types: monuments, restaurants & beer gardens,
 bakeries & cafés, active attractions, supermarkets, and pharmacies.
@@ -32,5 +32,5 @@ Phones need HTTPS for location to work. Easiest option: drag the `munich-finder`
 - `assets/places/` — real photos found via web search (Wikimedia Commons, Wikipedia, official sites).
 - `assets/defaults/` — per-type "no photo" placeholders, used only for the few places with no findable photo.
 
-Travel times are estimated from your live location to each place (straight-line distance + a
-detour factor for walking ~5 km/h and city driving ~26 km/h). To add or edit places, edit `data.js`.
+Walking times are estimated from your live location to each place using straight-line distance,
+a walking detour factor, and a pace of about 5 km/h. To add or edit places, edit `data.js`.

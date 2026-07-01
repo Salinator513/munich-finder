@@ -588,7 +588,7 @@ img { display: block; }
 .detail-type-top svg { flex: 0 0 auto; }
 .detail-type-top .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-/* spec chips — rating · walk · drive on one row (type lives in the corner pill) */
+/* spec chips — rating · walking time on one row (type lives in the corner pill) */
 .stats-row { display: flex; align-items: center; gap: 6px; }
 
 /* collapsible region (description + location + Maps) — hidden when the box is minimised */
