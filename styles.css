@@ -463,8 +463,9 @@ img { display: block; }
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.22s var(--ease);
+  /* large radius so the whole button lightens (not just a small spot under the finger) */
   background: radial-gradient(circle at var(--hx, 50%) var(--hy, 50%),
-              rgba(255,255,255,0.72), rgba(255,255,255,0.2) 42%, rgba(255,255,255,0) 70%);
+              rgba(255,255,255,0.92), rgba(255,255,255,0.58) 60%, rgba(255,255,255,0.3) 100%);
 }
 .is-pressing > .btn-sheen { opacity: 1; }
 /* holding/dragging a button must not select its label or pop the iOS link/callout menu */
@@ -650,6 +651,7 @@ img { display: block; }
   transition: transform 0.18s var(--spring), background 0.2s var(--ease);
 }
 .maps-btn:active { background: var(--blue-press); }
+.maps-btn.is-pressing { background: #4aa4f7; }   /* switches to a lighter blue while pressed/dragged */
 
 /* ============================================================
    Responsive — phones (family on iPhones)

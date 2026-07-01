@@ -143,8 +143,10 @@
   function enhanceButton(node, opts) {
     opts = opts || {};
     // limit + move govern resistance (smaller = stiffer); stretch governs how much it elongates
-    const limit = opts.limit || 20, scale = opts.scale || 1.06, drag = opts.drag !== false;
-    const stretch = opts.stretch || 140, move = (opts.move != null ? opts.move : 0.3);
+    const scale = opts.scale || 1.06, drag = opts.drag !== false;
+    // two independent resistances: moveLimit governs drift, stretchMax governs elongation
+    const moveLimit = opts.moveLimit || 38, moveF = (opts.moveF != null ? opts.moveF : 0.4);
+    const stretchMax = (opts.stretchMax != null ? opts.stretchMax : 0.6);
     const sheen = document.createElement("span");
     sheen.className = "btn-sheen";
     node.appendChild(sheen);
@@ -160,10 +162,15 @@
       const ox = e.clientX - sx, oy = e.clientY - sy;
       if (Math.abs(ox) > 4 || Math.abs(oy) > 4) moved = true;
       if (drag) {
-        // stretch along the drag axis (button + its symbol/label); drift only a little — big resistance
-        const rx = rubber(ox, limit), ry = rubber(oy, limit);
-        const sxx = scale + Math.abs(rx) / stretch, syy = scale + Math.abs(ry) / stretch;
-        node.style.transform = "translate(" + (rx * move) + "px," + (ry * move) + "px) scale(" + sxx + "," + syy + ")";
+        // movement: gentle drift with its own light resistance (rubber-banded)
+        const tx = rubber(ox, moveLimit) * moveF, ty = rubber(oy, moveLimit) * moveF;
+        // stretch: barely any resistance — keeps growing with the drag until the finger nears the screen edge
+        const downRoom = Math.max(120, (window.innerHeight - 28) - sy), upRoom = Math.max(120, sy - 28);
+        const rightRoom = Math.max(120, (window.innerWidth - 20) - sx), leftRoom = Math.max(120, sx - 20);
+        const ax = clamp(Math.abs(ox) / (ox >= 0 ? rightRoom : leftRoom), 0, 1);
+        const ay = clamp(Math.abs(oy) / (oy >= 0 ? downRoom : upRoom), 0, 1);
+        const sxx = scale + ax * stretchMax, syy = scale + ay * stretchMax;
+        node.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + sxx + "," + syy + ")";
       }
     }
     function onUp() {
@@ -470,7 +477,7 @@
   function setupMoveButton() {
     const btn = $("#detail-move"), img = $("#detail-img");
     const sheen = document.createElement("span"); sheen.className = "btn-sheen"; btn.appendChild(sheen);
-    const SPEED = 2.6, DEAD = 6, BLIMIT = 16;   // smaller limit = more resistance
+    const SPEED = 2.6, DEAD = 6, BLIMIT = 24;   // smaller limit = more resistance
     let active = false, sx = 0, sy = 0, dx = 0, raf = 0, wasP = 0;
     function hl(e) {
       const r = btn.getBoundingClientRect();
@@ -506,10 +513,10 @@
       dx = e.clientX - sx;
       const rx = rubber(dx, BLIMIT), ry = rubber(e.clientY - sy, BLIMIT);
       // stretches toward the finger (with its symbol), drifts only a little — high resistance
-      btn.style.setProperty("--mv-x", (rx * 0.5) + "px");
-      btn.style.setProperty("--mv-y", (ry * 0.5) + "px");
-      btn.style.setProperty("--mv-sx", (1.5 + Math.abs(rx) / 80) + "");
-      btn.style.setProperty("--mv-sy", (1.5 + Math.abs(ry) / 80) + "");
+      btn.style.setProperty("--mv-x", (rx * 0.6) + "px");
+      btn.style.setProperty("--mv-y", (ry * 0.6) + "px");
+      btn.style.setProperty("--mv-sx", (1.5 + Math.abs(rx) / 55) + "");
+      btn.style.setProperty("--mv-sy", (1.5 + Math.abs(ry) / 55) + "");
     });
     const end = () => {
       if (!active) return;
@@ -610,10 +617,10 @@
   function init() {
     renderFields();
     // enhance FIRST so the drag-cancels-tap guard runs before each button's action listener
-    enhanceButton($("#go"), { scale: 1.05, limit: 22, stretch: 120, move: 0.3 });
-    enhanceButton($("#results-back"), { scale: 1.3, limit: 18, stretch: 130, move: 0.26 });
-    enhanceButton($("#detail-back"), { scale: 1.3, limit: 18, stretch: 130, move: 0.26 });
-    enhanceButton($("#detail-maps"), { scale: 1.06, limit: 16, stretch: 110, move: 0.18 });  // stiffest — stretches, barely drifts
+    enhanceButton($("#go"), { scale: 1.05, moveLimit: 42, moveF: 0.42, stretchMax: 0.55 });
+    enhanceButton($("#results-back"), { scale: 1.3, moveLimit: 40, moveF: 0.42, stretchMax: 0.55 });
+    enhanceButton($("#detail-back"), { scale: 1.3, moveLimit: 40, moveF: 0.42, stretchMax: 0.55 });
+    enhanceButton($("#detail-maps"), { scale: 1.05, moveLimit: 40, moveF: 0.42, stretchMax: 0.65 });  // stretches the most
     $("#go").addEventListener("click", onGo);
     $("#results-back").addEventListener("click", () => history.back());
     $("#detail-back").addEventListener("click", () => history.back());
