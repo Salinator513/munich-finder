@@ -58,7 +58,7 @@
       '<path d="M6.6 3.8v3.9a2.05 2.05 0 0 0 4.1 0V3.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<path d="M8.65 3.8v3.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>' +
       '<path d="M8.65 7.8V20.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>' +
-      '<path d="M16.2 3.8c-1.7 0-2.75 2.4-2.75 5 0 1.95 1.1 3 2.75 3V20.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
+      '<path d="M16.6 3.6L16.6 19.3A0.95 0.95 0 0 1 14.7 19.3L14.7 11.9C13.9 11.3 13.3 9.7 13.3 7.9C13.3 5.8 14.5 4 16.6 3.6Z" fill="currentColor" stroke="currentColor" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>',
     bakery:
       '<path d="M4.2 8.4h12.2v3.3a4.6 4.6 0 0 1-4.6 4.6H8.8a4.6 4.6 0 0 1-4.6-4.6V8.4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>' +
       '<path d="M16.4 9.3h2a2.1 2.1 0 0 1 0 4.2h-2" fill="none" stroke="currentColor" stroke-width="1.8"/>' +
@@ -87,8 +87,10 @@
   };
 
   /* ---------- state ---------- */
-  const state = { type: null, travel: "any", rating: "any", userLoc: null, located: false, results: [], current: null };
+  const state = { type: null, travel: "any", rating: "any", userLoc: null, located: false, results: [], current: null, shown: 10 };
   const detail = { pan: 0, maxPan: 0, collapseP: 0, extraFull: 60 };
+  const RESULT_PAGE = 10;                 // show 10 at a time, then "load more"
+  let locPromise = null;                  // in-flight geolocation request
 
   const VIEW_BG = { home: "#ffffff", results: "#f5f5f7", detail: "#000000" };
   // top-bar tint per results category so the status bar blends into the hero photo (no visible strip)
@@ -101,6 +103,7 @@
   const $ = sel => document.querySelector(sel);
   function el(html) { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; }
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const delay = ms => new Promise(r => setTimeout(r, ms));
   const sign = x => (x > 0 ? 1 : x < 0 ? -1 : 0);
   // Apple rubber-band: offset grows with diminishing returns, asymptotes to ±limit
   function rubber(x, limit) { const c = 0.55; return (x * limit * c) / (limit + c * Math.abs(x)); }
@@ -124,7 +127,13 @@
     return { km, walkMin, driveMin };
   }
   function mapsUrl(p) {
-    return "https://maps.apple.com/?q=" + encodeURIComponent(p.name) + "&ll=" + p.lat + "," + p.lng + "&t=m";
+    // ≤15 min walk (inclusive) → walking directions; otherwise transit (tram/bus/S-Bahn)
+    const walk = (p.walkMin != null) ? p.walkMin : travelTimes(p).walkMin;
+    const flg = walk <= 15 ? "w" : "r";
+    let url = "https://maps.apple.com/?daddr=" + encodeURIComponent(p.lat + "," + p.lng) +
+              "&q=" + encodeURIComponent(p.name) + "&dirflg=" + flg;
+    if (state.userLoc) url += "&saddr=" + encodeURIComponent(state.userLoc.lat + "," + state.userLoc.lng);
+    return url;
   }
   function setChrome(view, topColor) {
     const c = VIEW_BG[view] || "#ffffff";
@@ -204,24 +213,31 @@
     f.classList.toggle("is-error", !!isError);
   }
   function requestLocation() {
-    if (!("geolocation" in navigator)) { state.userLoc = DATA.center; setFoot("Using Marienplatz for travel times"); return; }
+    if (state.located) return Promise.resolve(true);
+    if (locPromise) return locPromise;
+    if (!("geolocation" in navigator)) { state.userLoc = state.userLoc || DATA.center; setFoot("Using the hotel for travel times"); return Promise.resolve(false); }
     setFoot("Locating you…");
-    const ok = pos => {
-      state.userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-      state.located = true;
-      setFoot("Using your location for travel times", false, true);
-    };
-    const fail = err => {
-      state.userLoc = state.userLoc || DATA.center;
-      if (err && err.code === 1) setFoot("Location is off — allow it, then tap here", true);
-      else setFoot("Tap here to use your location", true);
-    };
-    // fast coarse fix first (succeeds on far more devices), then retry with high accuracy
-    navigator.geolocation.getCurrentPosition(
-      ok,
-      () => navigator.geolocation.getCurrentPosition(ok, fail, { enableHighAccuracy: true, timeout: 12000, maximumAge: 300000 }),
-      { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 }
-    );
+    locPromise = new Promise(resolve => {
+      let settled = false;
+      const finish = flag => { if (settled) return; settled = true; locPromise = null; resolve(flag); };
+      const onFix = pos => {
+        state.userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        state.located = true;
+        setFoot("Using your location for travel times", false, true);
+        // if a fix lands after we've already shown results, refresh them with the real distances
+        if (currentView() === "results") { state.results = compute(); state.shown = RESULT_PAGE; renderResults(); }
+        finish(true);
+      };
+      const onErr = err => {
+        state.userLoc = state.userLoc || DATA.center;
+        setFoot(err && err.code === 1 ? "Location blocked — turn it on in Settings, then tap here" : "Tap here to use your location", true);
+        finish(false);
+      };
+      // fire coarse + precise in parallel; first fix wins, precise one reports a real error
+      navigator.geolocation.getCurrentPosition(onFix, () => {}, { enableHighAccuracy: false, timeout: 10000, maximumAge: 120000 });
+      navigator.geolocation.getCurrentPosition(onFix, onErr, { enableHighAccuracy: true, timeout: 16000, maximumAge: 60000 });
+    });
+    return locPromise;
   }
 
   /* ---------- dropdowns ---------- */
@@ -363,11 +379,35 @@
       ));
       return;
     }
-    state.results.forEach((p, i) => {
-      const c = makeCard(p);
-      c.style.animationDelay = Math.min(i * 45, 400) + "ms";
+    if (!state.shown || state.shown < RESULT_PAGE) state.shown = RESULT_PAGE;
+    state.shown = Math.min(state.shown, n);
+    renderCards(0, state.shown);
+    renderLoadMore();
+  }
+  function renderCards(from, to) {
+    const listEl = $("#results-list");
+    for (let i = from; i < to && i < state.results.length; i++) {
+      const c = makeCard(state.results[i]);
+      c.style.animationDelay = Math.min((i - from) * 45, 300) + "ms";
       listEl.appendChild(c);
+    }
+  }
+  function renderLoadMore() {
+    const listEl = $("#results-list");
+    const old = document.getElementById("load-more"); if (old) old.remove();
+    if (state.shown >= state.results.length) return;
+    const remaining = state.results.length - state.shown;
+    const btn = el('<button class="maps-btn load-more-btn" id="load-more" type="button"><span>Show ' +
+      Math.min(RESULT_PAGE, remaining) + ' more</span></button>');
+    enhanceButton(btn, { scale: 1.05, limit: 32 });   // same stretch as the Maps button
+    btn.addEventListener("click", () => {
+      const from = state.shown;
+      state.shown = Math.min(state.shown + RESULT_PAGE, state.results.length);
+      const b = document.getElementById("load-more"); if (b) b.remove();
+      renderCards(from, state.shown);
+      renderLoadMore();
     });
+    listEl.appendChild(btn);
   }
 
   /* ---------- detail ---------- */
@@ -593,9 +633,8 @@
   window.addEventListener("resize", () => { if (currentView() === "detail") { computePan(); updatePanelMetrics(); } });
 
   /* ---------- Go ---------- */
-  function onGo() {
+  async function onGo() {
     haptic();
-    if (!state.located) requestLocation();
     if (!state.type) {
       const typeDd = document.querySelector('.dropdown[data-key="type"]');
       typeDd.classList.add("nudge");
@@ -606,9 +645,12 @@
     }
     const go = $("#go");
     go.classList.add("is-busy");
+    // wait (briefly) for a real location fix so travel times + the time filter are accurate
+    if (!state.located) await Promise.race([requestLocation(), delay(2600)]);
     state.results = compute();
+    state.shown = RESULT_PAGE;
     requestAnimationFrame(() => {
-      setTimeout(() => { pushView("results"); go.classList.remove("is-busy"); }, 160);
+      setTimeout(() => { pushView("results"); go.classList.remove("is-busy"); }, 120);
     });
   }
 
@@ -629,6 +671,8 @@
     history.replaceState({ view: "home" }, "");
     setChrome("home");
     requestLocation();
+    // if they enable location in Settings and come back to the tab, try again automatically
+    document.addEventListener("visibilitychange", () => { if (!document.hidden && !state.located) requestLocation(); });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

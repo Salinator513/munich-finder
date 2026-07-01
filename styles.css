@@ -653,6 +653,17 @@ img { display: block; }
 .maps-btn:active { background: var(--blue-press); }
 .maps-btn.is-pressing { background: #4aa4f7; }   /* switches to a lighter blue while pressed/dragged */
 
+/* white "load more" button — same Maps-button shape + stretch, white with black text */
+.load-more-btn {
+  align-self: center;
+  margin: 6px auto 14px;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 8px 22px rgba(0,0,0,0.12), inset 0 0 0 0.5px rgba(0,0,0,0.08);
+}
+.load-more-btn:active,
+.load-more-btn.is-pressing { background: #f0f0f2; }
+
 /* ============================================================
    Responsive — phones (family on iPhones)
    ============================================================ */
