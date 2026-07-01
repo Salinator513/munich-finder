@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
   <main id="app">
@@ -30,7 +30,7 @@
           <span>Go</span>
         </button>
 
-        <button class="home-foot" id="home-foot" type="button">Using your location for travel times</button>
+        <div class="home-foot" id="home-foot">Locating you…</div>
       </div>
     </section>
 
@@ -65,7 +65,7 @@
         <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
 
-      <div class="detail-loc-top" id="detail-loc" hidden></div>
+      <div class="detail-type-top" id="detail-type" hidden></div>
 
       <button class="icon-btn move-btn" id="detail-move" aria-label="Hold and drag to pan the photo" hidden>
         <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
@@ -80,7 +80,8 @@
         <div class="stats-row" id="detail-stats-row"><!-- spec chips --></div>
         <div class="detail-extra" id="detail-extra">
           <p class="detail-desc" id="detail-desc"></p>
-          <div class="extra-actions">
+          <div class="stats-row2">
+            <span class="chip loc" id="detail-loc" hidden></span>
             <a class="maps-btn" id="detail-maps" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" fill="currentColor"/></svg>
               <span>Maps</span>
@@ -92,7 +93,7 @@
 
   </main>
 
-  <script src="data.js?v=5"></script>
-  <script src="app.js?v=5"></script>
+  <script src="data.js?v=6"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>

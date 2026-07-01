@@ -80,6 +80,9 @@ img { display: block; }
   overflow: hidden;
   touch-action: pan-y;            /* let JS own horizontal gestures (swipe-back) */
 }
+/* on native iOS back-swipe the browser already animates the slide — swap our content
+   instantly underneath it so there's no second cross-fade / flash */
+#app.no-anim .screen { transition: none !important; }
 .screen.is-active {
   opacity: 1;
   visibility: visible;
@@ -430,7 +433,7 @@ img { display: block; }
   position: relative;
   overflow: hidden;
   display: flex; align-items: center; justify-content: center;
-  width: 60px; height: 60px;
+  width: 44px; height: 44px;           /* small at rest — grows only while pressed (JS scale) */
   border-radius: 999px;
   color: var(--ink);
   background: rgba(255,255,255,0.58);
@@ -443,6 +446,13 @@ img { display: block; }
     inset 0 1px 1.5px rgba(255,255,255,0.95),
     inset 0 0 0 0.6px rgba(255,255,255,0.5);
   transition: transform 0.2s var(--spring), background 0.2s var(--ease), box-shadow 0.24s var(--ease);
+}
+.icon-btn svg { transition: transform 0.2s var(--spring); }
+/* pressed glass buttons go MORE see-through (finger sheen still brightens the touch point) */
+.back-btn.is-pressing {
+  background: rgba(255,255,255,0.30);
+  -webkit-backdrop-filter: saturate(180%) blur(28px) brightness(1.12);
+  backdrop-filter: saturate(180%) blur(28px) brightness(1.12);
 }
 
 /* Apple "Liquid Glass" finger-tracked highlight — brightens under the touch, follows the finger */
@@ -460,12 +470,12 @@ img { display: block; }
 .hero-back { top: calc(14px + var(--safe-top)); left: 14px; z-index: 6; }
 .detail-back { top: calc(16px + var(--safe-top)); left: 16px; z-index: 9; }
 
-/* move / pan button — larger, set in from the corner so it can drag both ways */
+/* move / pan button — small at rest, set in from the corner so it can drag both ways */
 .move-btn {
   position: absolute;
   right: 28px;
   bottom: 230px;                 /* JS keeps this just above the panel */
-  width: 82px; height: 82px;
+  width: 56px; height: 56px;     /* grows big only while held (JS scale) */
   z-index: 8;
   --mv-x: 0px;
   touch-action: none;
@@ -477,7 +487,7 @@ img { display: block; }
   background: rgba(0,113,227,0.92);
   color: #fff;
   border-color: rgba(255,255,255,0.7);
-  transform: translateX(var(--mv-x)) scale(1.12);
+  transform: translateX(var(--mv-x)) scale(1.5);
   box-shadow: 0 0 0 6px rgba(0,113,227,0.20), 0 14px 32px rgba(0,113,227,0.5),
               inset 0 1px 2px rgba(255,255,255,0.55);
 }
@@ -525,13 +535,13 @@ img { display: block; }
 }
 .panel-grabber span {
   display: block;
-  width: 52px; height: 4px;
+  width: 104px; height: 3px;
   border-radius: 2px;
   background: rgba(120,120,128,0.5);
   transition: background 0.2s var(--ease), width 0.2s var(--spring);
 }
 .panel-grabber:active span,
-.detail-panel.is-collapsed .panel-grabber span { background: rgba(120,120,128,0.7); width: 60px; }
+.detail-panel.is-collapsed .panel-grabber span { background: rgba(120,120,128,0.7); width: 116px; }
 
 /* title at the top of the spec box — bold black, ~2.3x the spec size */
 .detail-title {
@@ -548,8 +558,9 @@ img { display: block; }
   overflow: hidden;
 }
 
-/* floating location pill — top-right of the screen, grayish so it reads as a spec, not the title */
-.detail-loc-top {
+/* floating TYPE pill — top-right of the screen: the location category ("Restaurant"),
+   grayish + smaller than the title so it reads as a label, not the heading */
+.detail-type-top {
   position: absolute;
   top: calc(20px + var(--safe-top));
   right: 14px;
@@ -569,25 +580,26 @@ img { display: block; }
   border: 0.5px solid rgba(255,255,255,0.5);
   box-shadow: var(--shadow-1);
 }
-.detail-loc-top[hidden] { display: none; }
-.detail-loc-top svg { flex: 0 0 auto; }
-.detail-loc-top .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.detail-type-top[hidden] { display: none; }
+.detail-type-top svg { flex: 0 0 auto; }
+.detail-type-top .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-/* spec chips — all four on one row */
-.stats-row { display: flex; align-items: center; gap: 5px; }
+/* spec chips — rating · walk · drive on one row (type lives in the corner pill) */
+.stats-row { display: flex; align-items: center; gap: 6px; }
 
-/* collapsible region (description + Maps) — hidden when the box is minimised */
+/* collapsible region (description + location + Maps) — hidden when the box is minimised */
 .detail-extra { overflow: hidden; }
-.extra-actions { display: flex; justify-content: flex-end; margin-top: 12px; }
+/* location chip on the left, Maps button on the right */
+.stats-row2 { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; }
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 5px 8px;
+  padding: 6px 10px;
   border-radius: 999px;
   background: rgba(118,118,128,0.26);
   border: 0.5px solid rgba(255,255,255,0.4);
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 650;
   color: #1d1d1f;
   white-space: nowrap;
@@ -596,8 +608,8 @@ img { display: block; }
 .chip svg { flex: 0 0 auto; }
 .chip .star { color: var(--star); }
 .chip .cl { color: #3a3a3c; font-weight: 550; }
-.chip.cat { flex: 0 0 auto; padding-left: 7px; padding-right: 7px; }
-.chip.loc { max-width: 100%; }
+.chip.loc { flex: 0 1 auto; min-width: 0; }
+.chip.loc[hidden] { display: none; }
 .chip.loc .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .detail-desc {

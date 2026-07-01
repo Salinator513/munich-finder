@@ -91,6 +91,11 @@
   const detail = { pan: 0, maxPan: 0, collapseP: 0, extraFull: 60 };
 
   const VIEW_BG = { home: "#ffffff", results: "#f5f5f7", detail: "#000000" };
+  // top-bar tint per results category so the status bar blends into the hero photo (no visible strip)
+  const HERO_TOP = {
+    monument: "#8f74ef", restaurant: "#f2842f", bakery: "#f2ac12",
+    active: "#25c489", supermarket: "#33ce67", pharmacy: "#ec5aa4"
+  };
 
   /* ---------- helpers ---------- */
   const $ = sel => document.querySelector(sel);
@@ -121,11 +126,13 @@
   function mapsUrl(p) {
     return "https://maps.apple.com/?q=" + encodeURIComponent(p.name) + "&ll=" + p.lat + "," + p.lng + "&t=m";
   }
-  function setChrome(view) {
+  function setChrome(view, topColor) {
     const c = VIEW_BG[view] || "#ffffff";
+    // page background (bottom overscroll) stays the screen colour; the top bar can differ
     document.documentElement.style.background = c;
+    document.body.style.background = c;
     const m = document.querySelector('meta[name="theme-color"]');
-    if (m) m.setAttribute("content", c);
+    if (m) m.setAttribute("content", topColor || c);
   }
   function currentView() {
     const a = document.querySelector(".screen.is-active");
@@ -182,7 +189,7 @@
     f.classList.toggle("is-error", !!isError);
   }
   function requestLocation() {
-    if (!("geolocation" in navigator)) { state.userLoc = DATA.center; setFoot("Tap to use your location"); return; }
+    if (!("geolocation" in navigator)) { state.userLoc = DATA.center; setFoot("Using Marienplatz for travel times"); return; }
     setFoot("Locating you…");
     navigator.geolocation.getCurrentPosition(
       pos => {
@@ -190,7 +197,7 @@
         state.located = true;
         setFoot("Using your location for travel times", false, true);
       },
-      () => { state.userLoc = state.userLoc || DATA.center; setFoot("Tap to use your location — using Marienplatz", true); },
+      () => { state.userLoc = state.userLoc || DATA.center; setFoot("Using Marienplatz for travel times", true); },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
   }
@@ -410,14 +417,19 @@
     };
     if (p.imageUrl) { img.src = p.imageUrl; } else { img.removeAttribute("src"); img.onerror(); }
 
+    // spec row — rating · walk · drive (the type/category lives in the top-right pill)
     $("#detail-stats-row").innerHTML = [
-      chip(catIcon(p.category, 17), "cat"),
       chip(ICON.star + "<b>" + p.rating.toFixed(1) + '</b><span class="cl">(' + compact(p.ratingCount) + ")</span>"),
       chip(ICON.walk + p.walkMin + ' <span class="cl">min</span>'),
       chip(ICON.car + p.driveMin + ' <span class="cl">min</span>')
     ].join("");
 
-    // floating location pill — top-right of the screen
+    // top-right pill — location TYPE (category), e.g. "Restaurant"
+    const typeEl = $("#detail-type"), cat = CATEGORIES[p.category];
+    if (cat) { typeEl.innerHTML = catIcon(p.category, 15) + '<span class="lbl">' + cat.label + "</span>"; typeEl.hidden = false; }
+    else { typeEl.hidden = true; typeEl.innerHTML = ""; }
+
+    // neighborhood location chip inside the box, next to the Maps button
     const locEl = $("#detail-loc");
     if (p.neighborhood) { locEl.innerHTML = ICON.pin + '<span class="lbl">' + p.neighborhood + "</span>"; locEl.hidden = false; }
     else { locEl.hidden = true; locEl.innerHTML = ""; }
@@ -484,24 +496,32 @@
 
   /* ---------- grabber: live drag-down shrinks description, drag-up expands ---------- */
   function setupGrabber() {
-    const grab = $("#panel-grabber"), extra = $("#detail-extra");
+    const grab = $("#panel-grabber"), extra = $("#detail-extra"), panel = $("#detail-panel");
     let active = false, sy = 0, startP = 0, moved = false;
     grab.addEventListener("pointerdown", e => {
       active = true; sy = e.clientY; startP = detail.collapseP; moved = false;
       cancelAnimationFrame(collapseRAF);
       try { grab.setPointerCapture(e.pointerId); } catch (err) {}
-      extra.style.transition = "none";
+      extra.style.transition = "none"; panel.style.transition = "none";
     });
     grab.addEventListener("pointermove", e => {
       if (!active) return;
       const dy = e.clientY - sy;
       if (Math.abs(dy) > 3) moved = true;
-      setCollapseProgress(clamp(startP + dy / Math.max(1, detail.extraFull), 0, 1));
+      const raw = startP + dy / Math.max(1, detail.extraFull);
+      setCollapseProgress(clamp(raw, 0, 1));
+      // Apple rubber-band past the ends: the whole panel gives a little with resistance
+      let over = 0;
+      if (raw < 0) over = rubber(raw * detail.extraFull, 44);
+      else if (raw > 1) over = rubber((raw - 1) * detail.extraFull, 44);
+      panel.style.transform = over ? "translateY(" + over + "px)" : "";
     });
     const end = () => {
       if (!active) return;
       active = false;
       extra.style.transition = "";
+      panel.style.transition = "transform 0.42s var(--spring)";
+      panel.style.transform = "";
       if (!moved) animateCollapse(detail.collapseP > 0.5 ? 0 : 1);   // a tap toggles
       else animateCollapse(detail.collapseP > 0.5 ? 1 : 0);          // a drag snaps to nearest
     };
@@ -513,22 +533,27 @@
   }
 
   /* ---------- router ---------- */
-  function goTo(id) { document.querySelectorAll(".screen").forEach(s => s.classList.toggle("is-active", s.id === id)); }
-  function applyView(view, placeId) {
-    setChrome(view);
-    if (view === "results") { renderResults(); goTo("results"); }
+  function goTo(id, instant) {
+    const app = document.getElementById("app");
+    if (instant) app.classList.add("no-anim");   // pop: browser already animated the slide — swap instantly
+    document.querySelectorAll(".screen").forEach(s => s.classList.toggle("is-active", s.id === id));
+    if (instant) { void app.offsetWidth; requestAnimationFrame(() => app.classList.remove("no-anim")); }
+  }
+  function applyView(view, placeId, instant) {
+    if (view === "results") { setChrome("results", HERO_TOP[state.type]); renderResults(); goTo("results", instant); }
     else if (view === "detail") {
+      setChrome("detail");
       const p = state.results.find(x => x.id === placeId) || state.current;
-      openDetail(p); goTo("detail");
-    } else { goTo("home"); }
+      openDetail(p); goTo("detail", instant);
+    } else { setChrome("home"); goTo("home", instant); }
   }
   function pushView(view, placeId) {
     history.pushState({ view: view, placeId: placeId || null }, "");
-    applyView(view, placeId);
+    applyView(view, placeId, false);
   }
   window.addEventListener("popstate", e => {
     const s = e.state || { view: "home" };
-    applyView(s.view, s.placeId);
+    applyView(s.view, s.placeId, true);
   });
   window.addEventListener("resize", () => { if (currentView() === "detail") { computePan(); updatePanelMetrics(); } });
 
@@ -558,11 +583,10 @@
     $("#go").addEventListener("click", onGo);
     $("#results-back").addEventListener("click", () => history.back());
     $("#detail-back").addEventListener("click", () => history.back());
-    $("#home-foot").addEventListener("click", () => { if (!state.located) requestLocation(); });
     enhanceButton($("#go"), { scale: 1.05, limit: 26 });
-    enhanceButton($("#results-back"), { scale: 1.09, limit: 30 });
-    enhanceButton($("#detail-back"), { scale: 1.09, limit: 30 });
-    enhanceButton($("#detail-maps"), { scale: 1.06, limit: 26 });
+    enhanceButton($("#results-back"), { scale: 1.32, limit: 30 });
+    enhanceButton($("#detail-back"), { scale: 1.32, limit: 30 });
+    enhanceButton($("#detail-maps"), { scale: 1.06, drag: false });   // Maps only grows — never drifts
     setupMoveButton();
     setupGrabber();
     history.replaceState({ view: "home" }, "");
