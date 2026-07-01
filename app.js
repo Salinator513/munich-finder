@@ -146,7 +146,7 @@
     const scale = opts.scale || 1.06, drag = opts.drag !== false;
     // ONE shared resistance (limit) for both drift and stretch; stretch is area-preserving (no growth)
     const limit = opts.limit || 52, moveF = (opts.moveF != null ? opts.moveF : 0.4);
-    const stretchDenom = opts.stretchDenom || 155;
+    const stretchDenom = opts.stretchDenom || 195;   /* higher = a bit less stretch */
     const sheen = document.createElement("span");
     sheen.className = "btn-sheen";
     node.appendChild(sheen);
@@ -511,7 +511,7 @@
       dx = e.clientX - sx;
       const rx = rubber(dx, BLIMIT), ry = rubber(e.clientY - sy, BLIMIT);
       // drift + area-preserving stretch (elongate one axis, compress the other — no growth)
-      const axm = Math.abs(rx) / 95, aym = Math.abs(ry) / 95;
+      const axm = Math.abs(rx) / 120, aym = Math.abs(ry) / 120;
       btn.style.setProperty("--mv-x", (rx * 0.6) + "px");
       btn.style.setProperty("--mv-y", (ry * 0.6) + "px");
       btn.style.setProperty("--mv-sx", (1.5 * (1 + axm - aym)) + "");
