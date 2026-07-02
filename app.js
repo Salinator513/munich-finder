@@ -128,10 +128,11 @@
   function mapsUrl(p) {
     // ≤15 min walk (inclusive) → walking directions; otherwise transit (tram/bus/S-Bahn)
     const walk = (p.walkMin != null) ? p.walkMin : travelTimes(p).walkMin;
-    const flg = walk <= 15 ? "w" : "r";
-    let url = "https://maps.apple.com/?daddr=" + encodeURIComponent(p.lat + "," + p.lng) +
-              "&q=" + encodeURIComponent(p.name) + "&dirflg=" + flg;
-    if (state.userLoc) url += "&saddr=" + encodeURIComponent(state.userLoc.lat + "," + state.userLoc.lng);
+    const mode = walk <= 15 ? "walking" : "transit";
+    let url = "https://www.google.com/maps/dir/?api=1" +
+              "&destination=" + encodeURIComponent(p.lat + "," + p.lng) +
+              "&travelmode=" + mode;
+    if (state.userLoc) url += "&origin=" + encodeURIComponent(state.userLoc.lat + "," + state.userLoc.lng);
     return url;
   }
   function setChrome(view, topColor) {

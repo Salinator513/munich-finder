@@ -2,7 +2,7 @@
 
 A simple, Apple-styled place finder for the family. Pick a **type**, a **walking time**, and a
 **minimum rating**, tap **Go**, and get a list of real Munich spots sorted by how close they are —
-each with a live walking-time estimate from your current location, a photo, and a one-tap **Open in Apple Maps** button.
+each with a live walking-time estimate from your current location, a photo, and a one-tap **Open in Google Maps** button.
 
 55 real, fact-checked Munich places across 6 types: monuments, restaurants & beer gardens,
 bakeries & cafés, active attractions, supermarkets, and pharmacies.
