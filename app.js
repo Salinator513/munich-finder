@@ -321,16 +321,22 @@
       .filter(p => p.category === state.type)
       .map(p => Object.assign({}, p, travelTimes(p)));
     if (state.travel !== "any") list = list.filter(p => p.walkMin <= state.travel);
-    if (state.rating !== "any") list = list.filter(p => p.rating >= state.rating);
-    list.sort((a, b) => a.walkMin - b.walkMin || b.rating - a.rating);
+    if (state.rating !== "any") list = list.filter(p => p.rating != null && p.rating >= state.rating);
+    list.sort((a, b) => a.walkMin - b.walkMin || (b.rating || 0) - (a.rating || 0));
     return list;
   }
 
   /* ---------- results ---------- */
+  // rating can be null (no trustworthy rating found) — show the star chip only when real
+  function ratingHTML(p, countCls) {
+    if (p.rating == null) return "";
+    return ICON.star + "<b>" + p.rating.toFixed(1) + '</b><span class="' + countCls + '">(' + compact(p.ratingCount || 0) + ")</span>";
+  }
   function statHTML(p) {
+    const r = ratingHTML(p, "stat-count");
     return (
       '<div class="card-stats">' +
-        '<span class="stat">' + ICON.star + "<b>" + p.rating.toFixed(1) + '</b><span class="stat-count">(' + compact(p.ratingCount) + ")</span></span>" +
+        (r ? '<span class="stat">' + r + "</span>" : "") +
         '<span class="stat">' + ICON.walk + p.walkMin + " min walk</span>" +
       "</div>"
     );
@@ -491,8 +497,9 @@
     if (p.imageUrl) { img.src = p.imageUrl; } else { img.removeAttribute("src"); img.onerror(); }
 
     // spec row — rating · walking time (the type/category lives in the top-right pill)
+    const ratingChip = ratingHTML(p, "cl");
     $("#detail-stats-row").innerHTML = [
-      chip(ICON.star + "<b>" + p.rating.toFixed(1) + '</b><span class="cl">(' + compact(p.ratingCount) + ")</span>"),
+      ratingChip ? chip(ratingChip) : "",
       chip(ICON.walk + p.walkMin + ' <span class="cl">min walk</span>')
     ].join("");
 

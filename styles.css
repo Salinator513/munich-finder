@@ -468,6 +468,13 @@ img { display: block; }
               rgba(255,255,255,0.92), rgba(255,255,255,0.58) 60%, rgba(255,255,255,0.3) 100%);
 }
 .is-pressing > .btn-sheen { opacity: 1; }
+/* on the black Go pill the full-white sheen would wash out the label — press lightens the
+   base a step (iOS dark-button style) and the finger glow stays subtle */
+.go-btn.is-pressing { background: #2e2e30; }
+.go-btn .btn-sheen {
+  background: radial-gradient(circle at var(--hx, 50%) var(--hy, 50%),
+              rgba(255,255,255,0.34), rgba(255,255,255,0.16) 60%, rgba(255,255,255,0.06) 100%);
+}
 /* holding/dragging a button must not select its label or pop the iOS link/callout menu */
 .icon-btn, .go-btn, .maps-btn { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
 .back-btn { position: absolute; }

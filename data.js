@@ -49,7 +49,7 @@ window.MUNICH_DATA = {
       "lng": 11.575382,
       "neighborhood": "Altstadt-Lehel (Old Town)",
       "description": "Munich's lively central square and the heart of the old town, where families gather to watch the famous Glockenspiel chime from the New Town Hall tower. There's plenty of open space, street performers and ice cream nearby, making it a perfect first stop for kids.",
-      "imageUrl": "assets/places/monument-marienplatz.png",
+      "imageUrl": "assets/places/monument-marienplatz.jpg",
       "isPhoto": true
     },
     {
@@ -63,7 +63,7 @@ window.MUNICH_DATA = {
       "lng": 11.573953,
       "neighborhood": "Altstadt-Lehel (Old Town)",
       "description": "This grand Gothic cathedral with its twin onion-domed towers is the unmistakable symbol of Munich's skyline. Step inside to spot the legendary 'Devil's Footprint' on the floor, a fun little mystery that delights curious kids.",
-      "imageUrl": "assets/places/monument-frauenkirche-cathedral-of-our-dear-lady.png",
+      "imageUrl": "assets/places/monument-frauenkirche-cathedral-of-our-dear-lady.jpg",
       "isPhoto": true
     },
     {
@@ -77,7 +77,7 @@ window.MUNICH_DATA = {
       "lng": 11.503352,
       "neighborhood": "Neuhausen-Nymphenburg",
       "description": "A magnificent Baroque summer palace surrounded by sprawling gardens, canals and fountains where families can stroll, picnic and watch swans glide by. The lavish royal rooms and the whimsical 'Beauty Gallery' make it a storybook day out.",
-      "imageUrl": "assets/places/monument-nymphenburg-palace-schloss-nymphenburg.png",
+      "imageUrl": "assets/places/monument-nymphenburg-palace-schloss-nymphenburg.jpg",
       "isPhoto": true
     },
     {
@@ -91,7 +91,7 @@ window.MUNICH_DATA = {
       "lng": 11.578289,
       "neighborhood": "Altstadt-Lehel (Old Town)",
       "description": "Once the royal palace of Bavaria's kings, this enormous complex dazzles with opulent halls, courtyards and a sparkling treasury full of crowns and jewels. Kids love hunting for the gilded grotto and the glittering gemstones on the family-friendly audio tour.",
-      "imageUrl": "assets/places/monument-munich-residenz.png",
+      "imageUrl": "assets/places/monument-munich-residenz.jpg",
       "isPhoto": true
     },
     {
@@ -105,7 +105,7 @@ window.MUNICH_DATA = {
       "lng": 11.581389,
       "neighborhood": "Maxvorstadt / Schwabing",
       "description": "A grand triumphal arch crowned by a lion-drawn chariot, often compared to the Arc de Triomphe in Paris. It marks the lively gateway to the student district of Schwabing and is a striking, free photo stop for the whole family.",
-      "imageUrl": "assets/places/monument-siegestor-victory-gate.png",
+      "imageUrl": "assets/places/monument-siegestor-victory-gate.jpg",
       "isPhoto": true
     },
     {
@@ -119,7 +119,7 @@ window.MUNICH_DATA = {
       "lng": 11.570722,
       "neighborhood": "Hackenviertel (Old Town)",
       "description": "A tiny but breathtaking Baroque-Rococo church tucked between shops, overflowing with gold, frescoes and dramatic detail on every surface. Its jewel-box interior wows visitors of all ages in just a few awe-filled minutes.",
-      "imageUrl": "assets/places/monument-asamkirche-st-johann-nepomuk.png",
+      "imageUrl": "assets/places/monument-asamkirche-st-johann-nepomuk.jpg",
       "isPhoto": true
     },
     {
@@ -133,7 +133,7 @@ window.MUNICH_DATA = {
       "lng": 11.5775,
       "neighborhood": "Altstadt-Lehel (Old Town)",
       "description": "An elegant Italian-inspired square framed by the bright-yellow Theatine Church and the grand Feldherrnhalle loggia. It's a wide, open space great for family photos and a relaxed start to a walk up the stately Ludwigstraße.",
-      "imageUrl": "assets/places/monument-odeonsplatz.png",
+      "imageUrl": "assets/places/monument-odeonsplatz.jpg",
       "isPhoto": true
     },
     {
@@ -147,7 +147,7 @@ window.MUNICH_DATA = {
       "lng": 11.575941,
       "neighborhood": "Altstadt-Lehel (Old Town)",
       "description": "Munich's oldest parish church, whose 91-metre tower 'Alter Peter' rewards those who climb its roughly 300 steps with sweeping views of the old town and, on clear days, the Alps. A fun little adventure for energetic kids right beside Marienplatz.",
-      "imageUrl": "assets/places/monument-st-peter-s-church-alter-peter.png",
+      "imageUrl": "assets/places/monument-st-peter-s-church-alter-peter.jpg",
       "isPhoto": true
     },
     {
@@ -161,7 +161,7 @@ window.MUNICH_DATA = {
       "lng": 11.567222,
       "neighborhood": "Hackenviertel / Isarvorstadt",
       "description": "One of Munich's three surviving medieval city gates, beautifully restored with twin Gothic towers marking the southern edge of the old town. It's a great free landmark to walk through on the way to the shops and Christmas market on Sendlinger Straße.",
-      "imageUrl": "assets/places/monument-sendlinger-tor.png",
+      "imageUrl": "assets/places/monument-sendlinger-tor.jpg",
       "isPhoto": true
     },
     {
@@ -175,7 +175,7 @@ window.MUNICH_DATA = {
       "lng": 11.592235,
       "neighborhood": "Englischer Garten (Schwabing-Freimann)",
       "description": "A charming wooden pagoda-style tower at the heart of the vast English Garden, surrounded by one of Munich's largest and most relaxed beer gardens. Families can spread out on the lawns, enjoy Bavarian snacks and let the kids run free in the huge park.",
-      "imageUrl": "assets/places/monument-chinesischer-turm-chinese-tower-englischer-garten.png",
+      "imageUrl": "assets/places/monument-chinesischer-turm-chinese-tower-englischer-garten.jpg",
       "isPhoto": true
     },
     {
@@ -189,7 +189,7 @@ window.MUNICH_DATA = {
       "lng": 11.5797,
       "neighborhood": "Altstadt-Lehel (Platzl, city center)",
       "description": "Munich's most famous beer hall, founded in 1589, with a lively festive atmosphere, live Bavarian brass music and big plates of pretzels, sausages and roast chicken. The huge communal tables and cheerful buzz make it an easy, memorable stop for families exploring the old town.",
-      "imageUrl": "assets/places/restaurant-hofbrauhaus-munchen.png",
+      "imageUrl": "assets/places/restaurant-hofbrauhaus-munchen.jpg",
       "isPhoto": true
     },
     {
@@ -203,7 +203,7 @@ window.MUNICH_DATA = {
       "lng": 11.5497,
       "neighborhood": "Maxvorstadt (near Hauptbahnhof)",
       "description": "A beloved, leafy beer garden under old chestnut trees serving Augustiner's famous Edelstoff straight from wooden barrels alongside hearty Bavarian classics. With thousands of shaded seats and a relaxed local feel, there's plenty of room for kids to roam while grown-ups enjoy a stein.",
-      "imageUrl": "assets/places/restaurant-augustiner-keller.png",
+      "imageUrl": "assets/places/restaurant-augustiner-keller.jpg",
       "isPhoto": true
     },
     {
@@ -217,7 +217,7 @@ window.MUNICH_DATA = {
       "lng": 11.5836,
       "neighborhood": "Au-Haidhausen",
       "description": "A warm, historic Bavarian tavern open since 1901 that is famous for its dumplings, roast duck and organic local fare near the Deutsches Museum. The cozy, welcoming atmosphere and classic comfort food make it a relaxed choice for a family dinner.",
-      "imageUrl": "assets/places/restaurant-wirtshaus-in-der-au.png",
+      "imageUrl": "assets/places/restaurant-wirtshaus-in-der-au.jpg",
       "isPhoto": true
     },
     {
@@ -231,7 +231,7 @@ window.MUNICH_DATA = {
       "lng": 11.5923,
       "neighborhood": "Schwabing (Englischer Garten)",
       "description": "Munich's second-largest beer garden, set around a charming wooden pagoda in the English Garden with around 7,000 seats shaded by chestnut trees. On weekends a Bavarian band plays from the tower, and there's space for kids to run and a nearby carousel, making it a classic family outing.",
-      "imageUrl": "assets/places/restaurant-biergarten-am-chinesischen-turm.png",
+      "imageUrl": "assets/places/restaurant-biergarten-am-chinesischen-turm.jpg",
       "isPhoto": true
     },
     {
@@ -245,7 +245,7 @@ window.MUNICH_DATA = {
       "lng": 11.5147,
       "neighborhood": "Neuhausen-Nymphenburg",
       "description": "The largest beer garden in the world with around 8,000 seats under giant chestnut trees, run as a Bavarian restaurant since the late 18th century. Best of all for families, there's an adjoining deer enclosure, playgrounds and a carousel, so children are entertained while parents enjoy Augustiner beer and Wirtshaus classics.",
-      "imageUrl": "assets/places/restaurant-koniglicher-hirschgarten.png",
+      "imageUrl": "assets/places/restaurant-koniglicher-hirschgarten.jpg",
       "isPhoto": true
     },
     {
@@ -259,7 +259,7 @@ window.MUNICH_DATA = {
       "lng": 11.5963,
       "neighborhood": "Schwabing (Englischer Garten)",
       "description": "A scenic restaurant and beer garden right on the Kleinhesseloher lake in the English Garden, with terraces overlooking the water and rowboats for hire nearby. Families can grab pretzels, Obatzda and roast pork in the self-service beer garden or enjoy a sit-down meal with a lovely lakeside view.",
-      "imageUrl": "assets/places/restaurant-seehaus-im-englischen-garten.png",
+      "imageUrl": "assets/places/restaurant-seehaus-im-englischen-garten.jpg",
       "isPhoto": true
     },
     {
@@ -273,7 +273,7 @@ window.MUNICH_DATA = {
       "lng": 11.5856,
       "neighborhood": "Au-Haidhausen",
       "description": "The flagship Paulaner brewery restaurant and beer garden, famous as the home of Munich's strong-beer festival, with a chestnut-shaded garden seating around 3,000. Big Bavarian portions, a sunny terrace and an easygoing atmosphere make it a comfortable spot for a family meal east of the Isar.",
-      "imageUrl": "assets/places/restaurant-paulaner-am-nockherberg.png",
+      "imageUrl": "assets/places/restaurant-paulaner-am-nockherberg.jpg",
       "isPhoto": true
     },
     {
@@ -287,7 +287,7 @@ window.MUNICH_DATA = {
       "lng": 11.5409,
       "neighborhood": "Ludwigsvorstadt-Isarvorstadt (Westend)",
       "description": "An authentic, down-to-earth Bavarian beer hall set inside the historic Augustiner brewery, where you can sometimes glimpse the brewery's stately horses. Loved by locals for fresh Augustiner beer and honest, hearty food at fair prices, it offers a genuine Munich experience away from the tourist crowds.",
-      "imageUrl": "assets/places/restaurant-augustiner-braustuben.png",
+      "imageUrl": "assets/places/restaurant-augustiner-braustuben.jpg",
       "isPhoto": true
     },
     {
@@ -315,7 +315,7 @@ window.MUNICH_DATA = {
       "lng": 11.5755,
       "neighborhood": "Altstadt (Marienplatz)",
       "description": "A beloved five-generation Munich bakery-café right on Marienplatz, with cases full of cakes, tarts and pastries and unbeatable upstairs views of the Glockenspiel that delight kids and grown-ups alike. A perfect coffee-and-cake stop in the heart of the old town.",
-      "imageUrl": "assets/places/bakery-rischart-cafe-am-marienplatz.png",
+      "imageUrl": "assets/places/bakery-rischart-cafe-am-marienplatz.jpg",
       "isPhoto": true
     },
     {
@@ -357,7 +357,7 @@ window.MUNICH_DATA = {
       "lng": 11.5707,
       "neighborhood": "Glockenbachviertel (Isarvorstadt)",
       "description": "Munich's go-to French bakery in the lively Glockenbach quarter, known for crackly baguettes, flaky croissants and irresistible éclairs and apple tarts. A charming, friendly spot for a French-style family treat.",
-      "imageUrl": "assets/places/bakery-boulangerie-dompierre.png",
+      "imageUrl": "assets/places/bakery-boulangerie-dompierre.jpg",
       "isPhoto": true
     },
     {
@@ -371,7 +371,7 @@ window.MUNICH_DATA = {
       "lng": 11.5743,
       "neighborhood": "Maxvorstadt",
       "description": "A grand, historic Viennese-style coffee house founded in 1888, famed for its house-made pralines, elegant cakes and sunny glasshouse atrium. A lovely place to linger over coffee and a slice of torte with the family.",
-      "imageUrl": "assets/places/bakery-cafe-luitpold.png",
+      "imageUrl": "assets/places/bakery-cafe-luitpold.jpg",
       "isPhoto": true
     },
     {
@@ -385,7 +385,7 @@ window.MUNICH_DATA = {
       "lng": 11.5718,
       "neighborhood": "Altstadt",
       "description": "A traditional family pastry shop with roots dating to 1825, renowned for its handmade Baumkuchen, Prinzregententorte and classic German cakes just steps from Marienplatz. An old-world coffee-and-cake treat the whole family can enjoy.",
-      "imageUrl": "assets/places/bakery-conditorei-cafe-kreutzkamm.png",
+      "imageUrl": "assets/places/bakery-conditorei-cafe-kreutzkamm.jpg",
       "isPhoto": true
     },
     {
@@ -413,7 +413,7 @@ window.MUNICH_DATA = {
       "lng": 11.576,
       "neighborhood": "Altstadt (Marienplatz)",
       "description": "A relaxed top-floor café overlooking Marienplatz, beloved for hearty breakfasts, good coffee and homemade strudel with a front-row view of the Rathaus Glockenspiel. A memorable, family-friendly perch above the bustle.",
-      "imageUrl": "assets/places/bakery-cafe-glockenspiel.png",
+      "imageUrl": "assets/places/bakery-cafe-glockenspiel.jpg",
       "isPhoto": true
     },
     {
@@ -427,7 +427,7 @@ window.MUNICH_DATA = {
       "lng": 11.6056,
       "neighborhood": "Schwabing / Lehel",
       "description": "One of the largest urban parks in the world, with endless meadows, shady tree-lined paths, streams, and a beer garden by the Chinese Tower. Perfect for a family stroll, a bike ride, a picnic, or watching the surfers on the Eisbach.",
-      "imageUrl": "assets/places/active-englischer-garten.png",
+      "imageUrl": "assets/places/active-englischer-garten.jpg",
       "isPhoto": true
     },
     {
@@ -441,7 +441,7 @@ window.MUNICH_DATA = {
       "lng": 11.5887,
       "neighborhood": "Lehel",
       "description": "Munich's famous standing river wave at the southern edge of the English Garden, where wetsuited surfers ride year-round. It's free to watch and an unforgettable, only-in-Munich spectacle for kids and grown-ups alike.",
-      "imageUrl": "assets/places/active-eisbachwelle.png",
+      "imageUrl": "assets/places/active-eisbachwelle.jpg",
       "isPhoto": true
     },
     {
@@ -455,7 +455,7 @@ window.MUNICH_DATA = {
       "lng": 11.5501,
       "neighborhood": "Milbertshofen-Am Hart / Olympiapark",
       "description": "The sweeping green grounds of the 1972 Olympics, with grassy hills, a lake, playgrounds, and the climbable Olympiaberg for great city views. A wonderful spot for families to walk, cycle, fly kites, or paddle on the lake.",
-      "imageUrl": "assets/places/active-olympiapark-munchen.png",
+      "imageUrl": "assets/places/active-olympiapark-munchen.jpg",
       "isPhoto": true
     },
     {
@@ -469,7 +469,7 @@ window.MUNICH_DATA = {
       "lng": 11.6082,
       "neighborhood": "Berg am Laim",
       "description": "One of the world's largest bouldering gyms, spanning multiple floors of colorful walls for every level plus a dedicated kids' area. A great rainy-day adventure where the whole family can climb, play, and refuel in the cafe.",
-      "imageUrl": "assets/places/active-boulderwelt-munchen-ost.png",
+      "imageUrl": "assets/places/active-boulderwelt-munchen-ost.jpg",
       "isPhoto": true
     },
     {
@@ -483,7 +483,7 @@ window.MUNICH_DATA = {
       "lng": 11.5447,
       "neighborhood": "Sendling / Thalkirchen",
       "description": "A beloved stretch of the Isar's wild riverbanks with gravel beaches, shallow water, and forest, ideal for paddling, barbecues, and lazy summer afternoons. There's even a classic beer garden tucked among the trees for families.",
-      "imageUrl": "assets/places/active-flaucher.png",
+      "imageUrl": "assets/places/active-flaucher.jpg",
       "isPhoto": true
     },
     {
@@ -497,7 +497,7 @@ window.MUNICH_DATA = {
       "lng": 11.5137,
       "neighborhood": "Sendling-Westpark",
       "description": "A beautifully landscaped park with lakes, an East Asian garden, playgrounds, and miles of walking and cycling paths. In summer there's open-air cinema and two beer gardens, making it a relaxed family favorite.",
-      "imageUrl": "assets/places/active-westpark.png",
+      "imageUrl": "assets/places/active-westpark.jpg",
       "isPhoto": true
     },
     {
@@ -511,7 +511,7 @@ window.MUNICH_DATA = {
       "lng": 11.5547,
       "neighborhood": "Thalkirchen-Obersendling-Forstenried",
       "description": "Set in the green Isar floodplains, this geo-zoo groups its animals by continent across spacious, natural habitats. With lots of walking, playgrounds, and a petting area, it's a full day of outdoor fun for families.",
-      "imageUrl": "assets/places/active-tierpark-hellabrunn.png",
+      "imageUrl": "assets/places/active-tierpark-hellabrunn.jpg",
       "isPhoto": true
     },
     {
@@ -525,7 +525,7 @@ window.MUNICH_DATA = {
       "lng": 11.5436,
       "neighborhood": "Sendling / Thalkirchen",
       "description": "One of Europe's largest climbing and bouldering centers, with towering indoor walls, a big outdoor area, and gear rental on site. Family and beginner zones make it easy for first-timers and kids to try roped climbing safely.",
-      "imageUrl": "assets/places/active-dav-kletter-und-boulderzentrum-munchen-sud-thalkirchen.png",
+      "imageUrl": "assets/places/active-dav-kletter-und-boulderzentrum-munchen-sud-thalkirchen.jpg",
       "isPhoto": true
     },
     {
@@ -539,7 +539,7 @@ window.MUNICH_DATA = {
       "lng": 11.5033,
       "neighborhood": "Neuhausen-Nymphenburg",
       "description": "The grand baroque palace gardens stretch over 180 hectares of canals, lakes, fountains, and tree-lined avenues that are free to wander. A peaceful, scenic place for long family walks, running, and spotting swans and pavilions.",
-      "imageUrl": "assets/places/active-schlosspark-nymphenburg.png",
+      "imageUrl": "assets/places/active-schlosspark-nymphenburg.jpg",
       "isPhoto": true
     },
     {
@@ -553,7 +553,7 @@ window.MUNICH_DATA = {
       "lng": 11.4452,
       "neighborhood": "Aubing-Lochhausen-Langwied",
       "description": "A modern, family-friendly bouldering gym with ever-changing routes, an outdoor climbing area, and a relaxed cafe. Often praised as one of the best spots for families to climb together in Munich.",
-      "imageUrl": "assets/places/active-boulderwelt-munchen-west.png",
+      "imageUrl": "assets/places/active-boulderwelt-munchen-west.jpg",
       "isPhoto": true
     },
     {
@@ -567,7 +567,7 @@ window.MUNICH_DATA = {
       "lng": 11.5556,
       "neighborhood": "Maxvorstadt",
       "description": "A big, bright supermarket right by the main station with an enormous selection and very long opening hours, making it an easy stop for families running errands at almost any hour. Wide aisles and a great fresh-produce section keep stroller-pushing parents happy.",
-      "imageUrl": "assets/places/supermarket-edeka-ernst.png",
+      "imageUrl": "assets/places/supermarket-edeka-ernst.jpg",
       "isPhoto": true
     },
     {
@@ -595,7 +595,7 @@ window.MUNICH_DATA = {
       "lng": 11.5739,
       "neighborhood": "Altstadt-Lehel",
       "description": "An award-winning premium supermarket tucked inside the elegant Fuenf Hoefe passage, famous for its outstanding fresh counters, fruit and vegetables. A lovely place to grab high-quality groceries while exploring the old town with the family.",
-      "imageUrl": "assets/places/supermarket-rewe-city-fuenf-hoefe.png",
+      "imageUrl": "assets/places/supermarket-rewe-city-fuenf-hoefe.jpg",
       "isPhoto": true
     },
     {
@@ -609,7 +609,7 @@ window.MUNICH_DATA = {
       "lng": 11.5862,
       "neighborhood": "Schwabing",
       "description": "A clean, well-stocked Edeka in the heart of lively Schwabing, praised for top-quality fruit and vegetables and fair prices. Handy for families combining a stroll along Leopoldstrasse with a quick grocery run.",
-      "imageUrl": "assets/places/supermarket-edeka-leopoldstrasse.png",
+      "imageUrl": "assets/places/supermarket-edeka-leopoldstrasse.jpg",
       "isPhoto": true
     },
     {
@@ -623,7 +623,7 @@ window.MUNICH_DATA = {
       "lng": 11.5631,
       "neighborhood": "Maxvorstadt",
       "description": "A welcoming neighborhood organic market with excellent fresh produce, a fresh-food counter, regional baked goods and natural cosmetics. Friendly service and high bio quality make it a favorite for health-conscious families.",
-      "imageUrl": "assets/places/supermarket-vollcorner-biomarkt-maxvorstadt.png",
+      "imageUrl": "assets/places/supermarket-vollcorner-biomarkt-maxvorstadt.jpg",
       "isPhoto": true
     },
     {
@@ -637,7 +637,7 @@ window.MUNICH_DATA = {
       "lng": 11.5189,
       "neighborhood": "Neuhausen-Nymphenburg (Gern)",
       "description": "A lovingly renovated organic store serving the leafy Gern and Nymphenburg neighborhoods since 2009, near Schloss Nymphenburg. Great regional and exotic ingredients make it a relaxed, family-friendly stop after a palace-park outing.",
-      "imageUrl": "assets/places/supermarket-vollcorner-biomarkt-nymphenburg-gern.png",
+      "imageUrl": "assets/places/supermarket-vollcorner-biomarkt-nymphenburg-gern.jpg",
       "isPhoto": true
     },
     {
@@ -651,7 +651,7 @@ window.MUNICH_DATA = {
       "lng": 11.5631,
       "neighborhood": "Maxvorstadt (Klinikviertel)",
       "description": "A spacious tegut in the Elisenhof center near the main station, with a large bio range and a good fresh fruit-and-vegetable selection. Central and easy to reach, it is a convenient choice for families shopping downtown.",
-      "imageUrl": "assets/places/supermarket-tegut-gute-lebensmittel-maxvorstadt-elisenhof.png",
+      "imageUrl": "assets/places/supermarket-tegut-gute-lebensmittel-maxvorstadt-elisenhof.jpg",
       "isPhoto": true
     },
     {
@@ -665,7 +665,7 @@ window.MUNICH_DATA = {
       "lng": 11.5708,
       "neighborhood": "Glockenbachviertel (Isarvorstadt)",
       "description": "A friendly tegut in the trendy Glockenbachviertel with a fresh-service counter and a strong organic selection. Perfect for families living or visiting in this central, walkable neighborhood.",
-      "imageUrl": "assets/places/supermarket-tegut-gute-lebensmittel-glockenbachviertel.png",
+      "imageUrl": "assets/places/supermarket-tegut-gute-lebensmittel-glockenbachviertel.jpg",
       "isPhoto": true
     },
     {
@@ -679,7 +679,7 @@ window.MUNICH_DATA = {
       "lng": 11.6447,
       "neighborhood": "Neuperlach (Ramersdorf-Perlach)",
       "description": "A modern supermarket in the basement of Perlach Plaza directly connected to the U-Bahn, with wide aisles, fresh produce and an open fresh counter. Praised as the best market in the area, it is an easy and pleasant family shop.",
-      "imageUrl": "assets/places/supermarket-tegut-gute-lebensmittel-neuperlach-perlach-plaza.png",
+      "imageUrl": "assets/places/supermarket-tegut-gute-lebensmittel-neuperlach-perlach-plaza.jpg",
       "isPhoto": true
     },
     {
@@ -693,7 +693,7 @@ window.MUNICH_DATA = {
       "lng": 11.5705,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A historic family-run pharmacy (since 1827) right in the pedestrian zone between Marienplatz and Stachus, with over 15,000 products in stock and multilingual staff who can advise the whole family in English, Russian, Arabic and more. Great for travellers needing hard-to-find international medications.",
-      "imageUrl": "assets/places/pharmacy-internationale-ludwigs-apotheke.png",
+      "imageUrl": "assets/places/pharmacy-internationale-ludwigs-apotheke.jpg",
       "isPhoto": true
     },
     {
@@ -707,7 +707,7 @@ window.MUNICH_DATA = {
       "lng": 11.5755,
       "neighborhood": "Altstadt (Angerviertel)",
       "description": "A friendly, certified pharmacy directly on Marienplatz with English-speaking staff and quick, competent service, perfect for families exploring the city centre who need a quick remedy. Conveniently central and easy to reach by U-Bahn or S-Bahn.",
-      "imageUrl": "assets/places/pharmacy-rathaus-apotheke-am-marienplatz.png",
+      "imageUrl": "assets/places/pharmacy-rathaus-apotheke-am-marienplatz.jpg",
       "isPhoto": true
     },
     {
@@ -721,7 +721,7 @@ window.MUNICH_DATA = {
       "lng": 11.5588,
       "neighborhood": "Ludwigsvorstadt (Hauptbahnhof)",
       "description": "A top-rated pharmacy just steps from Munich's main train station, praised for unhurried, friendly and competent advice and long hours (Mon-Sat until 8pm). A handy stop for arriving or departing families, with a 24-hour pickup machine for pre-ordered medication.",
-      "imageUrl": "assets/places/pharmacy-internationale-hauptbahnhof-apotheke.png",
+      "imageUrl": "assets/places/pharmacy-internationale-hauptbahnhof-apotheke.jpg",
       "isPhoto": true
     },
     {
@@ -735,7 +735,7 @@ window.MUNICH_DATA = {
       "lng": 11.5613,
       "neighborhood": "Ludwigsvorstadt-Isarvorstadt",
       "description": "A welcoming neighbourhood pharmacy near the station where owner Malika Rabah and her team advise in English, Arabic and French, making it easy for international families to get the help they need. Open six days a week with friendly, patient service.",
-      "imageUrl": "assets/places/pharmacy-stadtapotheke-am-hauptbahnhof.png",
+      "imageUrl": "assets/places/pharmacy-stadtapotheke-am-hauptbahnhof.jpg",
       "isPhoto": true
     },
     {
@@ -749,7 +749,7 @@ window.MUNICH_DATA = {
       "lng": 11.5655,
       "neighborhood": "Altstadt (Karlsplatz/Stachus)",
       "description": "A long-established pharmacy right at the busy Stachus (Karlsplatz), next to the Gloria cinema, well stocked and convenient for families shopping in the centre. Known for careful guidance on complex therapies as well as everyday family needs.",
-      "imageUrl": "assets/places/pharmacy-stachus-apotheke.png",
+      "imageUrl": "assets/places/pharmacy-stachus-apotheke.jpg",
       "isPhoto": true
     },
     {
@@ -763,7 +763,7 @@ window.MUNICH_DATA = {
       "lng": 11.5925,
       "neighborhood": "Schwabing (Alte Heide)",
       "description": "A large, very well-stocked pharmacy in northern Schwabing with several tills so families rarely wait long, plus a great cosmetics range and fast medication ordering. Open until 8pm on weekdays and on Saturdays too, which is handy for busy parents.",
-      "imageUrl": "assets/places/pharmacy-apotheke-schwabing-nord.png",
+      "imageUrl": "assets/places/pharmacy-apotheke-schwabing-nord.jpg",
       "isPhoto": true
     },
     {
@@ -777,7 +777,7 @@ window.MUNICH_DATA = {
       "lng": 11.5728,
       "neighborhood": "Schwabing-West",
       "description": "A charming, well-regarded pharmacy in the heart of Schwabing-West right by Hohenzollernplatz, praised for quick help, good advice and easy reachability. A lovely local stop for families living in or visiting the lively Hohenzollernstrasse area.",
-      "imageUrl": "assets/places/pharmacy-spitzweg-apotheke.png",
+      "imageUrl": "assets/places/pharmacy-spitzweg-apotheke.jpg",
       "isPhoto": true
     },
     {
@@ -791,7 +791,7 @@ window.MUNICH_DATA = {
       "lng": 11.5728,
       "neighborhood": "Isarvorstadt (Glockenbachviertel)",
       "description": "Often called one of the friendliest pharmacies in Munich, this welcoming spot in the trendy Glockenbachviertel offers warm, personal advice for the whole family. Conveniently located near the old southern cemetery and Isar riverside walks.",
-      "imageUrl": "assets/places/pharmacy-glockenbach-apotheke.png",
+      "imageUrl": "assets/places/pharmacy-glockenbach-apotheke.jpg",
       "isPhoto": true
     },
     {
@@ -812,7 +812,7 @@ window.MUNICH_DATA = {
       "id": "monument-karlstor-stachus",
       "category": "monument",
       "name": "Karlstor (Stachus)",
-      "rating": 4.0,
+      "rating": 4,
       "ratingCount": 825,
       "address": "Altstadt (Old Town), München",
       "lat": 48.1390104,
@@ -910,252 +910,238 @@ window.MUNICH_DATA = {
       "id": "monument-st-ludwig-s-church-ludwigskirche",
       "category": "monument",
       "name": "St. Ludwig's Church (Ludwigskirche)",
-      "rating": 4.4,
-      "ratingCount": 3000,
+      "rating": 4.7,
+      "ratingCount": 448,
       "address": "Maxvorstadt, München",
-      "lat": 48.1503,
-      "lng": 11.5808,
+      "lat": 48.1488494,
+      "lng": 11.5812526,
       "neighborhood": "Maxvorstadt",
       "description": "A twin-towered church on Ludwigstraße famous for one of the world's largest altar frescoes. A quick, awe-inspiring peek for anyone walking near the university.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-st-ludwig-s-church-ludwigskirche.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-bavaria-statue-ruhmeshalle",
       "category": "monument",
       "name": "Bavaria Statue & Ruhmeshalle",
-      "rating": 4.6,
-      "ratingCount": 8000,
+      "rating": 4.7,
+      "ratingCount": 3905,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.131,
-      "lng": 11.5455,
+      "lat": 48.1306873,
+      "lng": 11.5459393,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A giant bronze goddess towering over the Oktoberfest meadow, with a viewing gallery inside her head. The steps and open field are a short, easy stroll from the hotel.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-bavaria-statue-ruhmeshalle.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-wittelsbacher-brunnen",
       "category": "monument",
       "name": "Wittelsbacher Brunnen",
-      "rating": 4.5,
-      "ratingCount": 3000,
+      "rating": 4.7,
+      "ratingCount": 600,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.14,
-      "lng": 11.5679,
+      "lat": 48.1413445,
+      "lng": 11.5693136,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A monumental fountain of pale stone with dramatic figures riding water beasts. A refreshing landmark to pause at on the edge of Lenbachplatz.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-wittelsbacher-brunnen.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-alter-botanischer-garten",
       "category": "monument",
       "name": "Alter Botanischer Garten",
-      "rating": 4.3,
-      "ratingCount": 6000,
+      "rating": 4.1,
+      "ratingCount": 4780,
       "address": "Maxvorstadt, München",
-      "lat": 48.1421,
-      "lng": 11.562,
+      "lat": 48.14174,
+      "lng": 11.5643701,
       "neighborhood": "Maxvorstadt",
       "description": "A small leafy park with a fountain and lawns just steps from the main station. A handy shady spot to rest little legs near the hotel.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-alter-botanischer-garten.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-justizpalast-palace-of-justice",
       "category": "monument",
       "name": "Justizpalast (Palace of Justice)",
-      "rating": 4.5,
-      "ratingCount": 4000,
+      "rating": 4.6,
+      "ratingCount": 214,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1399,
-      "lng": 11.5615,
+      "lat": 48.1404898,
+      "lng": 11.5646876,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A palatial Neo-Baroque courthouse crowned by a huge glass dome, close to Stachus. Impressive to admire from outside on the way into town.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-justizpalast-palace-of-justice.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-nationaltheater-munchen",
       "category": "monument",
       "name": "Nationaltheater München",
-      "rating": 4.6,
-      "ratingCount": 6000,
+      "rating": 4.7,
+      "ratingCount": 4034,
       "address": "Altstadt-Lehel, München",
-      "lat": 48.1397,
-      "lng": 11.5786,
+      "lat": 48.1393491,
+      "lng": 11.5787723,
       "neighborhood": "Altstadt-Lehel",
       "description": "The stately columned home of the Bavarian State Opera on Max-Joseph-Platz. Even from outside it's a photogenic classical landmark near the Residenz.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-nationaltheater-munchen.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-friedensengel-angel-of-peace",
       "category": "monument",
       "name": "Friedensengel (Angel of Peace)",
       "rating": 4.6,
-      "ratingCount": 7000,
+      "ratingCount": 2243,
       "address": "Bogenhausen, München",
-      "lat": 48.1421,
-      "lng": 11.5931,
+      "lat": 48.1413436,
+      "lng": 11.5969927,
       "neighborhood": "Bogenhausen",
       "description": "A gleaming golden angel atop a tall column above the Isar, with terraces and fountains below. A scenic viewpoint over the river and city.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-friedensengel-angel-of-peace.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-maximilianeum",
       "category": "monument",
       "name": "Maximilianeum",
       "rating": 4.5,
-      "ratingCount": 3000,
+      "ratingCount": 571,
       "address": "Haidhausen, München",
-      "lat": 48.1361,
-      "lng": 11.592,
+      "lat": 48.1364112,
+      "lng": 11.5944161,
       "neighborhood": "Haidhausen",
       "description": "The grand hillside palace that houses the Bavarian parliament, overlooking the elegant Maximilianstraße. A handsome facade to admire from the bridge.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-maximilianeum.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-propylaen",
       "category": "monument",
       "name": "Propyläen",
-      "rating": 4.5,
-      "ratingCount": 4000,
+      "rating": null,
+      "ratingCount": null,
       "address": "Maxvorstadt, München",
-      "lat": 48.145,
-      "lng": 11.5648,
+      "lat": 48.1460577,
+      "lng": 11.5642555,
       "neighborhood": "Maxvorstadt",
       "description": "A monumental Greek-style gateway of columns and winged reliefs anchoring Königsplatz. A dramatic backdrop for photos among the museums.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-propylaen.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-monopteros",
       "category": "monument",
       "name": "Monopteros",
-      "rating": 4.6,
-      "ratingCount": 9000,
+      "rating": 4.7,
+      "ratingCount": 3616,
       "address": "Schwabing (English Garden), München",
-      "lat": 48.149,
-      "lng": 11.5895,
+      "lat": 48.1498803,
+      "lng": 11.5909208,
       "neighborhood": "Schwabing (English Garden)",
       "description": "A little Greek-style temple on a grassy hill in the English Garden with a lovely view over the city skyline. A favourite family picnic and kite-flying spot.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-monopteros.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-burgersaalkirche",
       "category": "monument",
       "name": "Bürgersaalkirche",
-      "rating": 4.5,
-      "ratingCount": 2000,
+      "rating": 4.7,
+      "ratingCount": 350,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1385,
-      "lng": 11.5716,
+      "lat": 48.1390184,
+      "lng": 11.5682512,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A modest church on the shopping street with a beautiful upper prayer hall and the tomb of beloved priest Rupert Mayer. A quiet surprise amid the bustle.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-burgersaalkirche.jpg",
+      "isPhoto": true
     },
     {
       "id": "monument-sankt-anna-kirche-lehel",
       "category": "monument",
       "name": "Sankt-Anna-Kirche (Lehel)",
-      "rating": 4.5,
-      "ratingCount": 1500,
+      "rating": null,
+      "ratingCount": null,
       "address": "Lehel, München",
-      "lat": 48.1401,
-      "lng": 11.5862,
+      "lat": 48.1396562,
+      "lng": 11.5879211,
       "neighborhood": "Lehel",
       "description": "A warm Baroque parish church in the leafy Lehel quarter with a bright, uplifting interior. An easy, calm stop near the river museums.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/monument-sankt-anna-kirche-lehel.jpg",
+      "isPhoto": true
     },
     {
       "id": "restaurant-der-pschorr",
       "category": "restaurant",
       "name": "Der Pschorr",
-      "rating": 4.4,
-      "ratingCount": 8000,
+      "rating": 4.2,
+      "ratingCount": 7850,
       "address": "Altstadt (Viktualienmarkt), München",
-      "lat": 48.1354,
-      "lng": 11.5761,
+      "lat": 48.1347514,
+      "lng": 11.5751968,
       "neighborhood": "Altstadt (Viktualienmarkt)",
       "description": "A lively Bavarian brewery restaurant on the Viktualienmarkt with hearty roasts, pretzels and its own beer garden. Bustling, family-friendly and full of local flavour.",
-      "imageUrl": null,
-      "isPhoto": false
-    },
-    {
-      "id": "restaurant-ratskeller-munchen",
-      "category": "restaurant",
-      "name": "Ratskeller München",
-      "rating": 4.2,
-      "ratingCount": 9000,
-      "address": "Altstadt (Old Town), München",
-      "lat": 48.1373,
-      "lng": 11.5762,
-      "neighborhood": "Altstadt (Old Town)",
-      "description": "Atmospheric vaulted cellar restaurant beneath the town hall serving classic Bavarian dishes. The arched rooms feel like a cosy underground adventure for kids.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/restaurant-der-pschorr.jpg",
+      "isPhoto": true
     },
     {
       "id": "restaurant-spatenhaus-an-der-oper",
       "category": "restaurant",
       "name": "Spatenhaus an der Oper",
-      "rating": 4.4,
-      "ratingCount": 5000,
+      "rating": 4.3,
+      "ratingCount": 5993,
       "address": "Altstadt-Lehel, München",
-      "lat": 48.1401,
-      "lng": 11.5779,
+      "lat": 48.1398289,
+      "lng": 11.5773071,
       "neighborhood": "Altstadt-Lehel",
       "description": "A refined but welcoming Bavarian tavern opposite the opera house, with schnitzel, dumplings and a view of Max-Joseph-Platz.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/restaurant-spatenhaus-an-der-oper.jpg",
+      "isPhoto": true
     },
     {
       "id": "restaurant-weisses-brauhaus-schneider",
       "category": "restaurant",
       "name": "Weisses Bräuhaus (Schneider)",
       "rating": 4.4,
-      "ratingCount": 10000,
+      "ratingCount": 16181,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1359,
-      "lng": 11.5786,
+      "lat": 48.1363952,
+      "lng": 11.5784219,
       "neighborhood": "Altstadt (Old Town)",
       "description": "The home of Schneider wheat beer, famous for roast pork and veal sausages in a boisterous old-Munich setting. A true Bavarian institution.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/restaurant-weisses-brauhaus-schneider.jpg",
+      "isPhoto": true
     },
     {
       "id": "restaurant-nurnberger-bratwurst-glockl-am-dom",
       "category": "restaurant",
       "name": "Nürnberger Bratwurst Glöckl am Dom",
       "rating": 4.3,
-      "ratingCount": 7000,
+      "ratingCount": 5254,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1385,
-      "lng": 11.5735,
+      "lat": 48.138186,
+      "lng": 11.5741404,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A snug half-timbered tavern by the Frauenkirche serving little Nuremberg sausages grilled over beechwood. Cosy, cheerful and great for sharing plates.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
       "id": "restaurant-andechser-am-dom",
       "category": "restaurant",
       "name": "Andechser am Dom",
-      "rating": 4.4,
-      "ratingCount": 7000,
+      "rating": 4.3,
+      "ratingCount": 4350,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1386,
-      "lng": 11.5739,
+      "lat": 48.1382365,
+      "lng": 11.5737748,
       "neighborhood": "Altstadt (Old Town)",
       "description": "Monastery beer and hearty Bavarian food beside the cathedral, with a sunny terrace. Relaxed and reliably tasty for the whole family.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
@@ -1163,168 +1149,168 @@ window.MUNICH_DATA = {
       "category": "restaurant",
       "name": "Hofbräukeller am Wiener Platz",
       "rating": 4.4,
-      "ratingCount": 9000,
+      "ratingCount": 8722,
       "address": "Haidhausen, München",
       "lat": 48.1344,
       "lng": 11.5931,
       "neighborhood": "Haidhausen",
       "description": "A grand beer hall with a huge chestnut-shaded beer garden and playground across the river. Roomy and welcoming for families with kids.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/restaurant-hofbraukeller-am-wiener-platz.jpg",
+      "isPhoto": true
     },
     {
       "id": "restaurant-lowenbraukeller",
       "category": "restaurant",
       "name": "Löwenbräukeller",
       "rating": 4.3,
-      "ratingCount": 8000,
+      "ratingCount": 9323,
       "address": "Maxvorstadt, München",
-      "lat": 48.147,
-      "lng": 11.556,
+      "lat": 48.1481139,
+      "lng": 11.5583203,
       "neighborhood": "Maxvorstadt",
       "description": "A palatial beer hall and garden at Stiglmaierplatz serving classic roasts and giant pretzels. Festive, spacious and easy-going.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/restaurant-lowenbraukeller.jpg",
+      "isPhoto": true
     },
     {
       "id": "restaurant-paulaner-brauhaus",
       "category": "restaurant",
       "name": "Paulaner Bräuhaus",
       "rating": 4.3,
-      "ratingCount": 5000,
+      "ratingCount": 1888,
       "address": "Isarvorstadt, München",
-      "lat": 48.1298,
-      "lng": 11.5679,
+      "lat": 48.126042,
+      "lng": 11.5595212,
       "neighborhood": "Isarvorstadt",
       "description": "A brewpub near Kapuzinerplatz brewing its own beer and serving stick-to-your-ribs Bavarian fare. A short walk from the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
       "id": "restaurant-zum-augustiner",
       "category": "restaurant",
       "name": "Zum Augustiner",
-      "rating": 4.3,
-      "ratingCount": 9000,
+      "rating": 4.2,
+      "ratingCount": 23385,
       "address": "Altstadt (Old Town), München",
       "lat": 48.1388,
       "lng": 11.5719,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A beautiful old restaurant on the pedestrian street pouring Augustiner from the wood and plating Munich classics. Ornate rooms and a lively courtyard.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
       "id": "restaurant-fraunhofer-wirtshaus",
       "category": "restaurant",
       "name": "Fraunhofer Wirtshaus",
-      "rating": 4.5,
-      "ratingCount": 4000,
+      "rating": 3.8,
+      "ratingCount": 1243,
       "address": "Isarvorstadt, München",
-      "lat": 48.1312,
-      "lng": 11.5721,
+      "lat": 48.1307189,
+      "lng": 11.5726076,
       "neighborhood": "Isarvorstadt",
       "description": "A characterful old-Munich tavern with hearty regional cooking and homemade dumplings, near the hotel. Warm, woody and full of local charm.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/restaurant-fraunhofer-wirtshaus.jpg",
+      "isPhoto": true
     },
     {
       "id": "restaurant-wirtshaus-zum-straubinger",
       "category": "restaurant",
       "name": "Wirtshaus zum Straubinger",
-      "rating": 4.3,
-      "ratingCount": 2000,
+      "rating": 4.4,
+      "ratingCount": 3743,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.135,
-      "lng": 11.5773,
+      "lat": 48.133801,
+      "lng": 11.5743345,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A traditional corner tavern near the Viktualienmarkt with generous Bavarian plates and friendly service. Unfussy and satisfying.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
       "id": "restaurant-bratwurstherzl",
       "category": "restaurant",
       "name": "Bratwurstherzl",
-      "rating": 4.4,
-      "ratingCount": 4000,
+      "rating": 3.9,
+      "ratingCount": 2139,
       "address": "Altstadt (Viktualienmarkt), München",
-      "lat": 48.1362,
-      "lng": 11.576,
+      "lat": 48.1353937,
+      "lng": 11.5772635,
       "neighborhood": "Altstadt (Viktualienmarkt)",
       "description": "A tiny wood-panelled spot grilling Nuremberg sausages over an open fire on the market square. Simple, delicious and very Munich.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
       "id": "restaurant-cafe-am-beethovenplatz",
       "category": "restaurant",
       "name": "Café am Beethovenplatz",
-      "rating": 4.4,
-      "ratingCount": 2500,
+      "rating": 4.2,
+      "ratingCount": 1126,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1316,
-      "lng": 11.5605,
+      "lat": 48.1333879,
+      "lng": 11.5587693,
       "neighborhood": "Ludwigsvorstadt",
       "description": "Munich's oldest café, with live piano, cakes and full meals in a genteel setting near the hotel. Charming for a relaxed family lunch.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
       "id": "restaurant-steinheil-16",
       "category": "restaurant",
       "name": "Steinheil 16",
-      "rating": 4.4,
-      "ratingCount": 4000,
+      "rating": 4.6,
+      "ratingCount": 5000,
       "address": "Maxvorstadt, München",
-      "lat": 48.149,
-      "lng": 11.567,
+      "lat": 48.1498533,
+      "lng": 11.5642279,
       "neighborhood": "Maxvorstadt",
       "description": "A cheerful student-favourite serving enormous, crispy schnitzels at friendly prices. Casual, filling and fun for hungry kids.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
       "id": "restaurant-zum-durnbrau",
       "category": "restaurant",
       "name": "Zum Dürnbräu",
-      "rating": 4.3,
-      "ratingCount": 3000,
+      "rating": 4.5,
+      "ratingCount": 4000,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1361,
-      "lng": 11.5789,
+      "lat": 48.1362214,
+      "lng": 11.5801071,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A historic inn tucked in a quiet lane serving Bavarian home cooking since centuries ago. Cosy and satisfying near the Isartor.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
       "id": "restaurant-augustiner-klosterwirt",
       "category": "restaurant",
       "name": "Augustiner Klosterwirt",
-      "rating": 4.3,
-      "ratingCount": 4000,
+      "rating": 4.5,
+      "ratingCount": 13000,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1388,
-      "lng": 11.5735,
+      "lat": 48.1384542,
+      "lng": 11.5722656,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A roomy Augustiner tavern beside the cathedral with a big menu of Bavarian favourites. Central, easy and dependable.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
       "id": "restaurant-pfalzer-residenz-weinstube",
       "category": "restaurant",
       "name": "Pfälzer Residenz Weinstube",
-      "rating": 4.2,
-      "ratingCount": 3000,
+      "rating": 4,
+      "ratingCount": 767,
       "address": "Altstadt-Lehel, München",
-      "lat": 48.1417,
-      "lng": 11.5789,
+      "lat": 48.1417806,
+      "lng": 11.577857,
       "neighborhood": "Altstadt-Lehel",
       "description": "A rustic wine tavern in the Residenz vaults serving regional dishes by candlelight. Atmospheric arched rooms feel like a mini adventure.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/restaurant-pfalzer-residenz-weinstube.jpg",
+      "isPhoto": true
     },
     {
       "id": "restaurant-l-osteria-theresienwiese",
@@ -1333,11 +1319,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 4000,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1332,
-      "lng": 11.5487,
+      "lat": 48.1374949,
+      "lng": 11.5482504,
       "neighborhood": "Ludwigsvorstadt",
       "description": "Big, crispy pizzas and easygoing Italian classics near the Oktoberfest meadow, a short walk from the hotel. A crowd-pleaser for families.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
@@ -1347,11 +1333,11 @@ window.MUNICH_DATA = {
       "rating": 4.4,
       "ratingCount": 2000,
       "address": "Altstadt (Viktualienmarkt), München",
-      "lat": 48.1361,
-      "lng": 11.5766,
+      "lat": 48.1352281,
+      "lng": 11.5775751,
       "neighborhood": "Altstadt (Viktualienmarkt)",
       "description": "A snug traditional restaurant just off the market with seasonal Bavarian cooking and homemade desserts. Warm and welcoming.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
@@ -1361,11 +1347,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 7000,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1373,
-      "lng": 11.5798,
+      "lat": 48.137908,
+      "lng": 11.579752,
       "neighborhood": "Altstadt (Old Town)",
       "description": "Ayinger beer and Bavarian classics opposite the Hofbräuhaus, with a bright terrace. Central and reliably hearty.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/restaurant.png",
       "isPhoto": false
     },
     {
@@ -1379,8 +1365,8 @@ window.MUNICH_DATA = {
       "lng": 11.582,
       "neighborhood": "Isarvorstadt",
       "description": "A beloved neighbourhood restaurant-bar with a wide menu and a secret whisky library. Cosy and popular with locals.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/restaurant-konigsquelle.jpg",
+      "isPhoto": true
     },
     {
       "id": "bakery-cafe-tambosi",
@@ -1389,11 +1375,11 @@ window.MUNICH_DATA = {
       "rating": 4.2,
       "ratingCount": 4000,
       "address": "Altstadt-Lehel, München",
-      "lat": 48.1428,
-      "lng": 11.5779,
+      "lat": 48.1429189,
+      "lng": 11.5782954,
       "neighborhood": "Altstadt-Lehel",
       "description": "A historic café on Odeonsplatz with an arcaded terrace, cakes and ice cream. A classic spot to watch the world go by.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1403,11 +1389,11 @@ window.MUNICH_DATA = {
       "rating": 4.7,
       "ratingCount": 3000,
       "address": "Isarvorstadt, München",
-      "lat": 48.133,
-      "lng": 11.5648,
+      "lat": 48.1403343,
+      "lng": 11.5888104,
       "neighborhood": "Isarvorstadt",
       "description": "An artisan gelateria beloved for silky, natural-flavour ice cream, a short walk from the hotel. A must for a sweet family treat.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1417,12 +1403,12 @@ window.MUNICH_DATA = {
       "rating": 4.6,
       "ratingCount": 2500,
       "address": "Glockenbachviertel, München",
-      "lat": 48.133,
-      "lng": 11.5735,
+      "lat": 48.1309884,
+      "lng": 11.5711081,
       "neighborhood": "Glockenbachviertel",
       "description": "A bright, modern specialty coffee roastery with excellent espresso and pastries. A stylish caffeine stop near the hotel.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/bakery-man-versus-machine-coffee-roasters.jpg",
+      "isPhoto": true
     },
     {
       "id": "bakery-cafe-vorhoelzer-forum",
@@ -1435,7 +1421,7 @@ window.MUNICH_DATA = {
       "lng": 11.568,
       "neighborhood": "Maxvorstadt",
       "description": "A rooftop café on the technical university with sweeping city views, cakes and light bites. A hidden gem for a scenic pause.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1445,11 +1431,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 2500,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1385,
-      "lng": 11.561,
+      "lat": 48.1424802,
+      "lng": 11.5600193,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A retro, arty café-bar near the station with cakes, drinks and a relaxed buzz. Handy and characterful close to the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1463,7 +1449,7 @@ window.MUNICH_DATA = {
       "lng": 11.567,
       "neighborhood": "Glockenbachviertel",
       "description": "A cosy, colourful café with big cakes and good coffee in the lively Glockenbach quarter. A friendly neighbourhood favourite.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1473,11 +1459,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 2200,
       "address": "Isarvorstadt, München",
-      "lat": 48.1315,
-      "lng": 11.5745,
+      "lat": 48.1320881,
+      "lng": 11.5757135,
       "neighborhood": "Isarvorstadt",
       "description": "An airy all-day café-bakery on pretty Gärtnerplatz with fresh bread, breakfasts and cakes. Relaxed and family-welcoming.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1487,11 +1473,11 @@ window.MUNICH_DATA = {
       "rating": 4.4,
       "ratingCount": 1800,
       "address": "Maxvorstadt, München",
-      "lat": 48.1465,
-      "lng": 11.562,
+      "lat": 48.1499216,
+      "lng": 11.5780409,
       "neighborhood": "Maxvorstadt",
       "description": "Famous for warm, gooey cinnamon rolls and hearty sourdough loaves baked on site. A sweet-smelling stop kids adore.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1501,25 +1487,11 @@ window.MUNICH_DATA = {
       "rating": 4.4,
       "ratingCount": 3000,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1358,
-      "lng": 11.5808,
+      "lat": 48.1347898,
+      "lng": 11.5769225,
       "neighborhood": "Altstadt (Old Town)",
       "description": "'The Crazy Ice Maker' whips up wild, inventive gelato flavours near the Isartor. A fun, surprising treat for adventurous tasters.",
-      "imageUrl": null,
-      "isPhoto": false
-    },
-    {
-      "id": "bakery-cafe-frischhut",
-      "category": "bakery",
-      "name": "Café Frischhut",
-      "rating": 4.5,
-      "ratingCount": 2000,
-      "address": "Altstadt (Viktualienmarkt), München",
-      "lat": 48.1354,
-      "lng": 11.5769,
-      "neighborhood": "Altstadt (Viktualienmarkt)",
-      "description": "A no-frills classic for warm Bavarian fried-dough Schmalznudeln dusted in sugar. A sweet, old-fashioned market treat.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1529,11 +1501,11 @@ window.MUNICH_DATA = {
       "rating": 4.4,
       "ratingCount": 3000,
       "address": "Altstadt (Viktualienmarkt), München",
-      "lat": 48.1352,
-      "lng": 11.5757,
+      "lat": 48.1361034,
+      "lng": 11.5764717,
       "neighborhood": "Altstadt (Viktualienmarkt)",
       "description": "A flagship Munich bakery-café with a huge spread of breads, cakes and pastries by the market. Bright and bustling.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1547,7 +1519,7 @@ window.MUNICH_DATA = {
       "lng": 11.5665,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A handy neighbourhood bakery for fresh pretzels, rolls and coffee by Sendlinger Tor, near the hotel. Quick and cheerful.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1561,7 +1533,7 @@ window.MUNICH_DATA = {
       "lng": 11.5745,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A cheerful café near the market known for its namesake Guglhupf cake and generous breakfasts. Warm and welcoming.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1571,11 +1543,11 @@ window.MUNICH_DATA = {
       "rating": 4.5,
       "ratingCount": 1200,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1345,
-      "lng": 11.5695,
+      "lat": 48.1361714,
+      "lng": 11.5684401,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A celebrated artisan bakery for crackly-crust sourdough and simple, superb pastries, close to the hotel. Small but excellent.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1585,11 +1557,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 700,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.135,
-      "lng": 11.559,
+      "lat": 48.1357968,
+      "lng": 11.5776163,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A friendly little café for coffee, cakes and light breakfasts, just steps from the hotel. An easy morning go-to.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1599,11 +1571,11 @@ window.MUNICH_DATA = {
       "rating": 4.4,
       "ratingCount": 1600,
       "address": "Neuhausen, München",
-      "lat": 48.154,
-      "lng": 11.549,
+      "lat": 48.1503737,
+      "lng": 11.538373,
       "neighborhood": "Neuhausen",
       "description": "A relaxed local café with big brunches, cakes and a sunny terrace. A comfy neighbourhood classic.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/bakery.png",
       "isPhoto": false
     },
     {
@@ -1613,12 +1585,12 @@ window.MUNICH_DATA = {
       "rating": 4.5,
       "ratingCount": 20000,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1316,
-      "lng": 11.5497,
+      "lat": 48.1313385,
+      "lng": 11.5494189,
       "neighborhood": "Ludwigsvorstadt",
       "description": "The vast open meadow that hosts Oktoberfest, otherwise a huge space to run, scooter and picnic — a very short walk from the hotel.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-theresienwiese.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-deutsches-museum",
@@ -1627,12 +1599,12 @@ window.MUNICH_DATA = {
       "rating": 4.6,
       "ratingCount": 45000,
       "address": "Isarvorstadt (Museumsinsel), München",
-      "lat": 48.1298,
-      "lng": 11.5834,
+      "lat": 48.1300409,
+      "lng": 11.582909,
       "neighborhood": "Isarvorstadt (Museumsinsel)",
       "description": "One of the world's biggest science and technology museums, packed with hands-on exhibits, ships, planes and a kids' zone. A brilliant rainy-day day-out.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-deutsches-museum.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-viktualienmarkt",
@@ -1641,12 +1613,12 @@ window.MUNICH_DATA = {
       "rating": 4.6,
       "ratingCount": 55000,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1352,
-      "lng": 11.5762,
+      "lat": 48.135518,
+      "lng": 11.5761813,
       "neighborhood": "Altstadt (Old Town)",
       "description": "Munich's beloved open-air food market with colourful stalls, snacks, a maypole and a beer garden. A feast for the senses for all ages.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-viktualienmarkt.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-alter-sudfriedhof",
@@ -1655,12 +1627,12 @@ window.MUNICH_DATA = {
       "rating": 4.5,
       "ratingCount": 4000,
       "address": "Isarvorstadt, München",
-      "lat": 48.129,
-      "lng": 11.5652,
+      "lat": 48.1276254,
+      "lng": 11.5652106,
       "neighborhood": "Isarvorstadt",
       "description": "A romantic old cemetery turned leafy park with mossy tombs and shady avenues, near the hotel. A peaceful, atmospheric stroll.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-alter-sudfriedhof.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-bavariapark",
@@ -1669,12 +1641,12 @@ window.MUNICH_DATA = {
       "rating": 4.4,
       "ratingCount": 3000,
       "address": "Schwanthalerhöhe, München",
-      "lat": 48.1345,
-      "lng": 11.543,
+      "lat": 48.1309136,
+      "lng": 11.5430036,
       "neighborhood": "Schwanthalerhöhe",
       "description": "A green park with lawns, big trees and a playground behind the Bavaria statue. A relaxed outdoor break a short walk from the hotel.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-bavariapark.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-mullersches-volksbad",
@@ -1683,12 +1655,12 @@ window.MUNICH_DATA = {
       "rating": 4.6,
       "ratingCount": 5000,
       "address": "Au, München",
-      "lat": 48.129,
-      "lng": 11.583,
+      "lat": 48.1322632,
+      "lng": 11.5884273,
       "neighborhood": "Au",
       "description": "A stunning Art Nouveau public swimming bath with grand vaulted pools and a steam room. A gorgeous place for a family swim.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-mullersches-volksbad.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-bmw-welt",
@@ -1697,12 +1669,12 @@ window.MUNICH_DATA = {
       "rating": 4.6,
       "ratingCount": 60000,
       "address": "Milbertshofen, München",
-      "lat": 48.177,
-      "lng": 11.556,
+      "lat": 48.1772189,
+      "lng": 11.5563758,
       "neighborhood": "Milbertshofen",
       "description": "A futuristic glass showcase of cars and motorbikes you can climb into, free to enter. Shiny, spacious and a hit with kids.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-bmw-welt.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-sea-life-munchen",
@@ -1715,8 +1687,8 @@ window.MUNICH_DATA = {
       "lng": 11.556,
       "neighborhood": "Olympiapark",
       "description": "An aquarium in the Olympic Park with tunnels, touch pools, sharks and rays. A compact, engaging outing for younger children.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-sea-life-munchen.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-botanischer-garten-munchen-nymphenburg",
@@ -1725,12 +1697,12 @@ window.MUNICH_DATA = {
       "rating": 4.7,
       "ratingCount": 12000,
       "address": "Nymphenburg, München",
-      "lat": 48.1636,
-      "lng": 11.5006,
+      "lat": 48.1632652,
+      "lng": 11.4998294,
       "neighborhood": "Nymphenburg",
       "description": "A magnificent botanical garden with glasshouses of palms, cacti and orchids plus outdoor themed gardens. Calm, colourful and stroller-friendly.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-botanischer-garten-munchen-nymphenburg.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-schyrenbad",
@@ -1739,12 +1711,12 @@ window.MUNICH_DATA = {
       "rating": 4.4,
       "ratingCount": 2500,
       "address": "Untergiesing, München",
-      "lat": 48.118,
-      "lng": 11.572,
+      "lat": 48.11985,
+      "lng": 11.5680725,
       "neighborhood": "Untergiesing",
       "description": "A charming outdoor summer pool by the Isar with lawns and diving boards. A refreshing family spot on a hot day.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-schyrenbad.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-sendlinger-tor-platz-to-marienplatz-stroll",
@@ -1757,8 +1729,8 @@ window.MUNICH_DATA = {
       "lng": 11.568,
       "neighborhood": "Altstadt (Old Town)",
       "description": "The lively pedestrian route from Sendlinger Tor into the old town, lined with shops, buskers and the Asamkirche. An easy walk from the hotel.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-sendlinger-tor-platz-to-marienplatz-stroll.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-bavaria-filmstadt",
@@ -1767,12 +1739,12 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 9000,
       "address": "Grünwald, München",
-      "lat": 48.093,
-      "lng": 11.585,
+      "lat": 48.0654274,
+      "lng": 11.554015,
       "neighborhood": "Grünwald",
       "description": "A film studio tour with sets, effects shows and a 4D cinema where kids can meet movie magic. A fun half-day adventure south of the city.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-bavaria-filmstadt.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-westbad",
@@ -1781,12 +1753,12 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 2000,
       "address": "Sendling-Westpark, München",
-      "lat": 48.134,
-      "lng": 11.515,
+      "lat": 48.142231,
+      "lng": 11.4754833,
       "neighborhood": "Sendling-Westpark",
       "description": "An indoor-outdoor pool complex with slides and family areas. A good bet for splashing whatever the weather.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-westbad.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-isarauen-at-reichenbachbrucke",
@@ -1799,8 +1771,8 @@ window.MUNICH_DATA = {
       "lng": 11.576,
       "neighborhood": "Isarvorstadt",
       "description": "Pebbly riverbanks and gentle Isar shallows perfect for paddling, stone-skipping and picnics, near the hotel. A lovely free outdoor escape.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-isarauen-at-reichenbachbrucke.jpg",
+      "isPhoto": true
     },
     {
       "id": "active-skate-bike-bavariapark-loop",
@@ -1823,12 +1795,12 @@ window.MUNICH_DATA = {
       "rating": 4.6,
       "ratingCount": 30000,
       "address": "Fröttmaning, München",
-      "lat": 48.2188,
-      "lng": 11.6247,
+      "lat": 48.2187901,
+      "lng": 11.6236227,
       "neighborhood": "Fröttmaning",
       "description": "The glowing home stadium of FC Bayern, with tours of the pitch, dugouts and museum. A thrill for young football fans.",
-      "imageUrl": null,
-      "isPhoto": false
+      "imageUrl": "assets/places/active-allianz-arena-tour.jpg",
+      "isPhoto": true
     },
     {
       "id": "supermarket-rewe-city-hauptbahnhof",
@@ -1841,7 +1813,7 @@ window.MUNICH_DATA = {
       "lng": 11.5602,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A large central-station supermarket with long hours for snacks, drinks and picnic supplies, near the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -1851,11 +1823,11 @@ window.MUNICH_DATA = {
       "rating": 4.2,
       "ratingCount": 600,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1358,
-      "lng": 11.5555,
+      "lat": 48.1372164,
+      "lng": 11.5479798,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A well-stocked neighbourhood supermarket a couple of minutes from the hotel for groceries and fresh bread.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -1865,11 +1837,11 @@ window.MUNICH_DATA = {
       "rating": 4,
       "ratingCount": 700,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1352,
-      "lng": 11.5572,
+      "lat": 48.1372557,
+      "lng": 11.5600513,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A budget-friendly discount supermarket close to the hotel for water, fruit and quick essentials.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -1879,25 +1851,11 @@ window.MUNICH_DATA = {
       "rating": 4,
       "ratingCount": 650,
       "address": "Schwanthalerhöhe, München",
-      "lat": 48.1345,
-      "lng": 11.547,
+      "lat": 48.1342746,
+      "lng": 11.545242,
       "neighborhood": "Schwanthalerhöhe",
       "description": "A no-frills discounter for cheap snacks and drinks, a short walk from the hotel toward Theresienwiese.",
-      "imageUrl": null,
-      "isPhoto": false
-    },
-    {
-      "id": "supermarket-rewe-sonnenstra-e",
-      "category": "supermarket",
-      "name": "REWE Sonnenstraße",
-      "rating": 4.1,
-      "ratingCount": 800,
-      "address": "Ludwigsvorstadt, München",
-      "lat": 48.1362,
-      "lng": 11.5662,
-      "neighborhood": "Ludwigsvorstadt",
-      "description": "A handy central supermarket near Sendlinger Tor for groceries, deli items and picnic bits.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -1907,11 +1865,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 500,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1355,
-      "lng": 11.5658,
+      "lat": 48.1313312,
+      "lng": 11.5681197,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A quality grocery with lots of organic and fresh options, easy to reach from the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -1925,7 +1883,7 @@ window.MUNICH_DATA = {
       "lng": 11.568,
       "neighborhood": "Isarvorstadt",
       "description": "An organic supermarket with fresh produce, bread and wholefoods near Kapuzinerplatz, a short walk from the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -1935,11 +1893,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 900,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1348,
-      "lng": 11.5735,
+      "lat": 48.1351693,
+      "lng": 11.5794055,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A large organic supermarket by the market with a good deli and takeaway counter. Central and healthy.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -1949,11 +1907,11 @@ window.MUNICH_DATA = {
       "rating": 4,
       "ratingCount": 700,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1408,
-      "lng": 11.559,
+      "lat": 48.1413238,
+      "lng": 11.5603553,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A convenient supermarket right by the main station for last-minute groceries near the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -1967,7 +1925,7 @@ window.MUNICH_DATA = {
       "lng": 11.554,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A discount supermarket close to the hotel for everyday basics at low prices.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -1977,25 +1935,11 @@ window.MUNICH_DATA = {
       "rating": 4.1,
       "ratingCount": 700,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1338,
-      "lng": 11.5672,
+      "lat": 48.1347685,
+      "lng": 11.5688959,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A central supermarket at Sendlinger Tor, a few minutes' walk from the hotel, open late for essentials.",
-      "imageUrl": null,
-      "isPhoto": false
-    },
-    {
-      "id": "supermarket-migros-tengelmann-goetheplatz",
-      "category": "supermarket",
-      "name": "Migros / Tengelmann Goetheplatz",
-      "rating": 4,
-      "ratingCount": 400,
-      "address": "Ludwigsvorstadt, München",
-      "lat": 48.1298,
-      "lng": 11.5622,
-      "neighborhood": "Ludwigsvorstadt",
-      "description": "A neighbourhood grocery at Goetheplatz for fresh food and picnic supplies, close to the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -2009,7 +1953,7 @@ window.MUNICH_DATA = {
       "lng": 11.5768,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A tidy supermarket beside the famous market, handy for stocking up in the old town.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/supermarket.png",
       "isPhoto": false
     },
     {
@@ -2023,7 +1967,7 @@ window.MUNICH_DATA = {
       "lng": 11.561,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A large, well-stocked pharmacy by the main station with English-speaking staff, near the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
@@ -2033,11 +1977,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 400,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1337,
-      "lng": 11.5668,
+      "lat": 48.13387,
+      "lng": 11.5654089,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A friendly pharmacy right at Sendlinger Tor, a few minutes from the hotel, for medicines and travel needs.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
@@ -2047,11 +1991,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 300,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1298,
-      "lng": 11.562,
+      "lat": 48.1291305,
+      "lng": 11.5594014,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A neighbourhood pharmacy at Goetheplatz, close to the hotel, with helpful advice and remedies.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
@@ -2065,7 +2009,7 @@ window.MUNICH_DATA = {
       "lng": 11.556,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A convenient local pharmacy just around the corner from the hotel for everyday health needs.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
@@ -2079,7 +2023,7 @@ window.MUNICH_DATA = {
       "lng": 11.5652,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A central pharmacy near Sendlinger Tor with a wide range of medicines and toiletries.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
@@ -2089,11 +2033,11 @@ window.MUNICH_DATA = {
       "rating": 4.3,
       "ratingCount": 350,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.135,
-      "lng": 11.57,
+      "lat": 48.1336954,
+      "lng": 11.5652632,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A long-standing pharmacy on the way into the old town, easy to reach from the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
@@ -2103,11 +2047,11 @@ window.MUNICH_DATA = {
       "rating": 4.2,
       "ratingCount": 300,
       "address": "Altstadt (Old Town), München",
-      "lat": 48.1357,
-      "lng": 11.5805,
+      "lat": 48.1339916,
+      "lng": 11.5834122,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A helpful pharmacy near the Isartor gate, handy while exploring the old town.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
@@ -2121,21 +2065,21 @@ window.MUNICH_DATA = {
       "lng": 11.552,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A local pharmacy close to the Theresienwiese and the hotel for quick health essentials.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
       "id": "pharmacy-bahnhofplatz-apotheke",
       "category": "pharmacy",
-      "name": "Bahnhofplatz-Apotheke",
+      "name": "Internationale Hauptbahnhof Apotheke",
       "rating": 4.1,
       "ratingCount": 400,
       "address": "Ludwigsvorstadt, München",
-      "lat": 48.1402,
-      "lng": 11.5588,
+      "lat": 48.1391635,
+      "lng": 11.5605343,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A pharmacy right on the station square, very close to the hotel, useful for travellers.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
@@ -2149,7 +2093,7 @@ window.MUNICH_DATA = {
       "lng": 11.5648,
       "neighborhood": "Altstadt (Old Town)",
       "description": "A central pharmacy at busy Stachus with long hours and a full range of remedies.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     },
     {
@@ -2163,7 +2107,7 @@ window.MUNICH_DATA = {
       "lng": 11.559,
       "neighborhood": "Ludwigsvorstadt",
       "description": "A neighbourhood pharmacy on Lindwurmstraße near Goetheplatz, close to the hotel.",
-      "imageUrl": null,
+      "imageUrl": "assets/defaults/pharmacy.png",
       "isPhoto": false
     }
   ]
